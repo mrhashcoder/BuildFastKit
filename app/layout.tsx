@@ -1,18 +1,17 @@
 import type { Metadata } from "next";
 import { siteConfig } from "@/store/site";
-import localFont from "next/font/local";
+import { Ubuntu_Mono, Courier_Prime } from "next/font/google"
 import "./globals.css";
 
-const geistSans = localFont({
-	src: "./fonts/GeistVF.woff",
-	variable: "--font-geist-sans",
-	weight: "100 900",
-});
-const geistMono = localFont({
-	src: "./fonts/GeistMonoVF.woff",
-	variable: "--font-geist-mono",
-	weight: "100 900",
-});
+const ubuntu_mono = Ubuntu_Mono({
+  weight: ["400", "700"],
+  subsets: ["latin"]
+})
+
+const courier_prime = Courier_Prime({
+  weight: ['400', '700'],
+  subsets: ["latin"]
+})
 
 export const metadata = {
 	metadataBase: new URL(siteConfig.url.base),
@@ -62,13 +61,13 @@ export default function RootLayout({
 }: Readonly<{
 	children: React.ReactNode;
 }>) {
-	return (
-		<html lang="en">
-			<body
-				className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-			>
-				{children}
-			</body>
-		</html>
-	);
+  return (
+    <html lang="en">
+      <body
+        className={ubuntu_mono.className}
+      >
+        {children}
+      </body>
+    </html>
+  );
 }
