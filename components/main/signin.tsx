@@ -3,7 +3,6 @@
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
-import { signIn } from "next-auth/react"
 
 import { Button } from "@/components/ui/button"
 import {
@@ -15,13 +14,17 @@ import {
   FormMessage,
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
+import { supabase } from "@/lib/supabaseAuth"
+import { useState } from "react"
 
 const formSchema = z.object({
-    email: z.string(),
-    password: z.string()
+    email: z.string().email(),
+    password: z.string().min(6)
 })
 
 export function Signin() {
+
+    const [isLoading, setIsLoading] = useState(false)
 
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
@@ -32,14 +35,26 @@ export function Signin() {
     })
      
     async function onSubmit(values: z.infer<typeof formSchema>) {
+        setIsLoading(true)
 
-        const res = await signIn("credentials", {
-            email: values.email,
-            password: values.password,
-            redirect: false
-        })
-        console.log(res)
+        try {
+            const { data, error } = await supabase.auth.signInWithPassword({
+                email: values.email,
+                password: values.password,
+            })
 
+            if (error) {
+                console.error("Error during signin:", error.message);
+            } else {
+                console.log("Signin successful:", data);
+            }
+            
+            setIsLoading(false)
+
+        } catch (err) {
+            console.log(err)
+            setIsLoading(false)
+        }
     }
 
   return (
@@ -52,9 +67,9 @@ export function Signin() {
                 name="email"
                 render={({ field }) => (
                     <FormItem>
-                        <FormLabel>email</FormLabel>
+                        <FormLabel>Email</FormLabel>
                         <FormControl>
-                            <Input placeholder="email" {...field} />
+                            <Input type="email" placeholder="email" {...field} />
                         </FormControl>
                         <FormMessage />
                     </FormItem>
@@ -67,13 +82,13 @@ export function Signin() {
                     <FormItem>
                         <FormLabel>Password</FormLabel>
                         <FormControl>
-                            <Input placeholder="password" {...field} />
+                            <Input type="password" placeholder="password" {...field} />
                         </FormControl>
                         <FormMessage />
                     </FormItem>
                 )}
             />
-            <Button type="submit">Submit</Button>
+            <Button type="submit" disabled={isLoading}>Submit</Button>
         </form>
         </Form>
     </div>

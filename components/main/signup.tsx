@@ -15,34 +15,49 @@ import {
   FormMessage,
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
+import { supabase } from "@/lib/supabaseAuth"
+import { useState } from "react"
 
 const formSchema = z.object({
-    name: z.string(),
-    username: z.string(),
     email: z.string().email(),
-    password: z.string()
+    password: z.string().min(6)
 })
 
+
 export function Signup() {
+
+    const [isLoading, setIsLoading] = useState(false)
+
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
-            name: "",
-            username: "",
             email: "",
             password: "",
         },
     })
      
     async function onSubmit(values: z.infer<typeof formSchema>) {
+        setIsLoading(true)
         console.log("yooooo")
-        try{
-            const user = await axios.post("http://localhost:3000/api/user", values)
+          
+        try {
+            const { data, error } = await supabase.auth.signUp({
+                email: values.email,
+                password: values.password,
+            })
 
-            console.log(user)
+            if (error) {
+                console.error("Error during signup:", error.message);
+            } else {
+                console.log("Signup successful:", data);
+            }
+
+            setIsLoading(false)
+
         } catch (err) {
             console.log(err)
-        }
+            setIsLoading(false)
+        }    
     }
 
   return (
@@ -52,38 +67,12 @@ export function Signup() {
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
             <FormField
                 control={form.control}
-                name="name"
-                render={({ field }) => (
-                    <FormItem>
-                        <FormLabel>Name</FormLabel>
-                        <FormControl>
-                            <Input placeholder="name" {...field} />
-                        </FormControl>
-                        <FormMessage />
-                    </FormItem>
-                )}
-            />
-            <FormField
-                control={form.control}
-                name="username"
-                render={({ field }) => (
-                    <FormItem>
-                        <FormLabel>Username</FormLabel>
-                        <FormControl>
-                            <Input placeholder="username" {...field} />
-                        </FormControl>
-                        <FormMessage />
-                    </FormItem>
-                )}
-            />
-            <FormField
-                control={form.control}
                 name="email"
                 render={({ field }) => (
                     <FormItem>
-                        <FormLabel>email</FormLabel>
+                        <FormLabel>Email</FormLabel>
                         <FormControl>
-                            <Input placeholder="email" {...field} />
+                            <Input type="email" placeholder="email" {...field} />
                         </FormControl>
                         <FormMessage />
                     </FormItem>
@@ -96,13 +85,13 @@ export function Signup() {
                     <FormItem>
                         <FormLabel>Password</FormLabel>
                         <FormControl>
-                            <Input placeholder="password" {...field} />
+                            <Input type="password" placeholder="password" {...field} />
                         </FormControl>
                         <FormMessage />
                     </FormItem>
                 )}
             />
-            <Button type="submit">Submit</Button>
+            <Button type="submit" disabled={isLoading}>Submit</Button>
         </form>
         </Form>
     </div>
