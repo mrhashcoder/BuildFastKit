@@ -2,7 +2,6 @@
 
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
-import axios from "axios"
 import { z } from "zod"
 
 import { Button } from "@/components/ui/button"
@@ -17,6 +16,7 @@ import {
 import { Input } from "@/components/ui/input"
 import { supabase } from "@/lib/supabaseAuth"
 import { useState } from "react"
+import { useRouter } from "next/navigation"
 
 const formSchema = z.object({
     email: z.string().email(),
@@ -26,6 +26,7 @@ const formSchema = z.object({
 
 export function Signup() {
 
+    const router = useRouter()
     const [isLoading, setIsLoading] = useState(false)
 
     const form = useForm<z.infer<typeof formSchema>>({
@@ -50,6 +51,7 @@ export function Signup() {
                 console.error("Error during signup:", error.message);
             } else {
                 console.log("Signup successful:", data);
+                router.push('/dashboard')
             }
 
             setIsLoading(false)

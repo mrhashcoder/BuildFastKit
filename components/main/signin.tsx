@@ -15,7 +15,8 @@ import {
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { supabase } from "@/lib/supabaseAuth"
-import { useState } from "react"
+import { useEffect, useState } from "react"
+import { useRouter } from "next/navigation"
 
 const formSchema = z.object({
     email: z.string().email(),
@@ -24,7 +25,38 @@ const formSchema = z.object({
 
 export function Signin() {
 
+
+    const router = useRouter()
     const [isLoading, setIsLoading] = useState(false)
+
+
+    useEffect(() => {
+        const checkSession = async () => {
+            const { data: { session } } = await supabase.auth.getSession();
+        
+            if (session) {
+                router.push('/dashboard');
+            }
+        };
+    
+        checkSession();
+    
+        const { data: { subscription } } = supabase.auth.onAuthStateChange(
+            async (event, session) => {
+
+                console.log(event, session)
+                if (event === 'SIGNED_IN') {
+                    router.push('/dashboard');
+                }
+            }
+        );
+    
+        return () => {
+            subscription.unsubscribe();
+        };
+    }, [router]);
+
+
 
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
@@ -47,6 +79,7 @@ export function Signin() {
                 console.error("Error during signin:", error.message);
             } else {
                 console.log("Signin successful:", data);
+                router.push("/dashboard")
             }
             
             setIsLoading(false)
