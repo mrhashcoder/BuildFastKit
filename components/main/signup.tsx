@@ -14,8 +14,8 @@ import {
   FormMessage,
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
-import { supabase } from "@/lib/supabaseAuth"
-import { useState } from "react"
+// import { supabase } from "@/lib/supabaseAuth"
+import { useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
 
 const formSchema = z.object({
@@ -24,7 +24,7 @@ const formSchema = z.object({
 })
 
 
-export function Signup() {
+export function Signup({signup}: any) {
 
     const router = useRouter()
     const [isLoading, setIsLoading] = useState(false)
@@ -42,18 +42,20 @@ export function Signup() {
         console.log("yooooo")
           
         try {
-            const { data, error } = await supabase.auth.signUp({
-                email: values.email,
-                password: values.password,
-            })
+            // const { data, error } = await supabase.auth.signUp({
+            //     email: values.email,
+            //     password: values.password,
+            // })
 
-            if (error) {
-                console.error("Error during signup:", error.message);
-            } else {
-                console.log("Signup successful:", data);
-                router.push('/dashboard')
-            }
+            // if (error) {
+            //     console.error("Error during signup:", error.message);
+            // } else {
+            //     console.log("Signup successful:", data);
 
+            //     router.push('/dashboard')
+            // }
+
+            signup(values)
             setIsLoading(false)
 
         } catch (err) {

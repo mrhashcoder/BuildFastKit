@@ -1,45 +1,47 @@
 'use client'
 
 import { Button } from "@/components/ui/button"
-import { supabase } from "@/lib/supabaseAuth"
+// import { supabase } from "@/lib/supabaseAuth"
 import { useRouter } from "next/navigation"
 import { useEffect, useState } from "react"
 
-export function SignOut() {
+export function SignOut({logout}: any) {
 
     const [isLoading, setIsLoading] = useState(false)
     const router = useRouter()
 
-    useEffect(() => {
+    // useEffect(() => {
 
-        const { data: { subscription } } = supabase.auth.onAuthStateChange(
-            async (event, session) => {
+    //     const { data: { subscription } } = supabase.auth.onAuthStateChange(
+    //         async (event, session) => {
 
-                console.log(event, session)
+    //             console.log(event, session)
                 
-                if (event === 'SIGNED_OUT') {
-                    router.push('/signin');
-                }
-            }
-        );
+    //             if (event === 'SIGNED_OUT') {
+    //                 router.push('/signin');
+    //             }
+    //         }
+    //     )
         
-        return () => {
-            subscription.unsubscribe();
-        };
+    //     return () => {
+    //         subscription.unsubscribe();
+    //     };
 
-    }, [router])
+    // }, [router])
 
     const handleClick = async () => {
         setIsLoading(true)
 
         try {
-            const { error } = await supabase.auth.signOut()
+            // const { error } = await supabase.auth.signOut()
 
-            if (error) {
-                console.error("Error during signout:", error.message);
-            } else {
-                console.log("Signout successful");
-            }
+            // if (error) {
+            //     console.error("Error during signout:", error.message);
+            // } else {
+            //     console.log("Signout successful");
+            // }
+
+            logout()
             setIsLoading(false)
 
         } catch (err) {

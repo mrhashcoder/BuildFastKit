@@ -14,7 +14,7 @@ import {
   FormMessage,
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
-import { supabase } from "@/lib/supabaseAuth"
+// import { supabase } from "@/lib/supabaseAuth"
 import { useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
 
@@ -23,40 +23,11 @@ const formSchema = z.object({
     password: z.string().min(6)
 })
 
-export function Signin() {
-
+export function Signin( { login }: any) {
 
     const router = useRouter()
+    const [error, setError] = useState<{success: boolean, message: string} | null>()
     const [isLoading, setIsLoading] = useState(false)
-
-
-    useEffect(() => {
-        const checkSession = async () => {
-            const { data: { session } } = await supabase.auth.getSession();
-        
-            if (session) {
-                router.push('/dashboard');
-            }
-        };
-    
-        checkSession();
-    
-        const { data: { subscription } } = supabase.auth.onAuthStateChange(
-            async (event, session) => {
-
-                console.log(event, session)
-                if (event === 'SIGNED_IN') {
-                    router.push('/dashboard');
-                }
-            }
-        );
-    
-        return () => {
-            subscription.unsubscribe();
-        };
-    }, [router]);
-
-
 
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
@@ -67,21 +38,27 @@ export function Signin() {
     })
      
     async function onSubmit(values: z.infer<typeof formSchema>) {
+        setError(null)
         setIsLoading(true)
 
-        try {
-            const { data, error } = await supabase.auth.signInWithPassword({
-                email: values.email,
-                password: values.password,
-            })
+        // try {
+            // const { data, error } = await supabase.auth.signInWithPassword({
+            //     email: values.email,
+            //     password: values.password,
+            // })
 
-            if (error) {
-                console.error("Error during signin:", error.message);
-            } else {
-                console.log("Signin successful:", data);
-                router.push("/dashboard")
-            }
-            
+            // if (error) {
+            //     console.error("Error during signin:", error.message);
+            // } else {
+            //     console.log("Signin successful:", data);
+            //     router.push("/dashboard")
+            // }
+
+        try {
+            // Simulate login call (replace with actual login logic)
+            const res = await login(values)
+
+            setError(res)
             setIsLoading(false)
 
         } catch (err) {
@@ -121,6 +98,7 @@ export function Signin() {
                     </FormItem>
                 )}
             />
+            {!error?.success && <p className="text-sm text-red-500">{error?.message}</p>}
             <Button type="submit" disabled={isLoading}>Submit</Button>
         </form>
         </Form>
