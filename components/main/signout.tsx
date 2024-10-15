@@ -1,56 +1,56 @@
-'use client'
+"use client"
 
 import { Button } from "@/components/ui/button"
 // import { supabase } from "@/lib/supabaseAuth"
 import { useRouter } from "next/navigation"
 import { useEffect, useState } from "react"
 
-export function SignOut({logout}: any) {
+export function SignOut({ logout }: any) {
+  const [isLoading, setIsLoading] = useState(false)
+  const router = useRouter()
 
-    const [isLoading, setIsLoading] = useState(false)
-    const router = useRouter()
+  // useEffect(() => {
 
-    // useEffect(() => {
+  //     const { data: { subscription } } = supabase.auth.onAuthStateChange(
+  //         async (event, session) => {
 
-    //     const { data: { subscription } } = supabase.auth.onAuthStateChange(
-    //         async (event, session) => {
+  //             console.log(event, session)
 
-    //             console.log(event, session)
-                
-    //             if (event === 'SIGNED_OUT') {
-    //                 router.push('/signin');
-    //             }
-    //         }
-    //     )
-        
-    //     return () => {
-    //         subscription.unsubscribe();
-    //     };
+  //             if (event === 'SIGNED_OUT') {
+  //                 router.push('/signin');
+  //             }
+  //         }
+  //     )
 
-    // }, [router])
+  //     return () => {
+  //         subscription.unsubscribe();
+  //     };
 
-    const handleClick = async () => {
-        setIsLoading(true)
+  // }, [router])
 
-        try {
-            // const { error } = await supabase.auth.signOut()
+  const handleClick = async () => {
+    setIsLoading(true)
 
-            // if (error) {
-            //     console.error("Error during signout:", error.message);
-            // } else {
-            //     console.log("Signout successful");
-            // }
+    try {
+      // const { error } = await supabase.auth.signOut()
 
-            logout()
-            setIsLoading(false)
+      // if (error) {
+      //     console.error("Error during signout:", error.message);
+      // } else {
+      //     console.log("Signout successful");
+      // }
 
-        } catch (err) {
-            console.log(err)
-            setIsLoading(false)
-        }
+      logout()
+      setIsLoading(false)
+    } catch (err) {
+      console.log(err)
+      setIsLoading(false)
     }
+  }
 
-    return <Button onClick={handleClick} disabled={isLoading}>
-        Signout
+  return (
+    <Button onClick={handleClick} disabled={isLoading}>
+      Signout
     </Button>
+  )
 }

@@ -1,18 +1,16 @@
-import { Signin } from '@/components/main/signin'
-import { login } from './actions'
-import React from 'react'
+import { Signin } from "@/components/main/signin"
+import { login } from "@/lib/supabaseService"
+import React from "react"
 
 const page = () => {
   return (
-    <div className='h-screen flex justify-center items-center'>
-        <Signin login={login} />
+    <div className="h-screen flex justify-center items-center">
+      <Signin login={login} />
     </div>
   )
 }
 
 export default page
-
-
 
 // export default function LoginPage() {
 //   return (
