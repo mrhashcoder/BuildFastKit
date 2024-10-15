@@ -3,11 +3,6 @@ import path from "path"
 
 export const privateLinks: NavLink[] = [
   {
-    name: "root",
-    path: "/",
-    description: "The root",
-  },
-  {
     name: "dashboard",
     path: "/dashboard",
     description: "The Dashboard",
@@ -22,8 +17,31 @@ export const privateLinks: NavLink[] = [
     path: "/invoice",
     description: "the Inoivce",
   },
+  {
+    name: "profile",
+    path: "/profile",
+    description: "the Profile",
+  },
 ]
 
-export const publicLinks: NavLink[] = []
+export const publicLinks: NavLink[] = [
+  {
+    name: "login",
+    path: "/login",
+    description: "the Login",
+  },
+  {
+    name: "signin",
+    path: "/login",
+    description: "the Login",
+  },
+  {
+    name: "root",
+    path: "/",
+    description: "The root",
+  },
+]
 
-export const afterLoginLink: NavLink = privateLinks[1]
+export const afterAuthLink: NavLink = privateLinks[0]
+
+export const authLink: NavLink = publicLinks[0]

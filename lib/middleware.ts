@@ -1,4 +1,4 @@
-import { afterLoginLink, privateLinks } from "@/config/links"
+import { afterAuthLink, authLink, privateLinks } from "@/config/links"
 import { createServerClient } from "@supabase/ssr"
 import { NextResponse, type NextRequest } from "next/server"
 
@@ -43,15 +43,13 @@ export async function updateSession(request: NextRequest) {
   console.log(user)
 
   const validateUser = (request: NextRequest): boolean => {
-    return privateLinks.some((link) => request.nextUrl.pathname === link.path);
-  };
-
-  console.log(validateUser(request))
+    return privateLinks.some((link) => request.nextUrl.pathname === link.path)
+  }
 
   if (!user && validateUser(request)) {
     // no user, potentially respond by redirecting the user to the login page
     const url = request.nextUrl.clone()
-    url.pathname = "/login"
+    url.pathname = authLink.path
     return NextResponse.redirect(url)
   }
 
@@ -60,9 +58,8 @@ export async function updateSession(request: NextRequest) {
     (request.nextUrl.pathname.startsWith("/login") ||
       request.nextUrl.pathname.startsWith("/signup"))
   ) {
-    // no user, potentially respond by redirecting the user to the login page
     const url = request.nextUrl.clone()
-    url.pathname = "/dashboard"
+    url.pathname = afterAuthLink.path
     return NextResponse.redirect(url)
   }
 
