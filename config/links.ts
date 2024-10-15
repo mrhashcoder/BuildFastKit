@@ -26,4 +26,4 @@ export const privateLinks: NavLink[] = [
 
 export const publicLinks: NavLink[] = []
 
-export const afterLoginLink: NavLink = privateLinks[2]
+export const afterLoginLink: NavLink = privateLinks[1]

@@ -3,6 +3,7 @@
 import { revalidatePath } from "next/cache"
 import { redirect } from "next/navigation"
 import { createClient } from "@/lib/subabaseClient"
+import { afterLoginLink } from "@/config/links"
 
 export async function login(value: any) {
   const supabase = createClient()
@@ -23,7 +24,7 @@ export async function login(value: any) {
   }
 
   revalidatePath("/", "layout")
-  redirect("/dashboard")
+  redirect(afterLoginLink.path)
 }
 
 export async function signup(value: any) {
@@ -44,7 +45,7 @@ export async function signup(value: any) {
   }
 
   revalidatePath("/", "layout")
-  redirect("/dashboard")
+  redirect(afterLoginLink.path)
 }
 
 export async function logout() {
