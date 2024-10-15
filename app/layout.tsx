@@ -1,17 +1,17 @@
-import type { Metadata } from "next"
-import { siteConfig } from "@/config/site"
-import { Ubuntu_Mono, Courier_Prime } from "next/font/google"
-import "./globals.css"
+import type { Metadata } from "next";
+import { siteConfig } from "@/config/site";
+import { Ubuntu_Mono, Courier_Prime } from "next/font/google";
+import "./globals.css";
 
 const ubuntu_mono = Ubuntu_Mono({
   weight: ["400", "700"],
   subsets: ["latin"],
-})
+});
 
 const courier_prime = Courier_Prime({
   weight: ["400", "700"],
   subsets: ["latin"],
-})
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url.base),
@@ -54,16 +54,16 @@ export const metadata: Metadata = {
   icons: {
     icon: "/favicon.ico",
   },
-}
+};
 
 export default function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode
+  children: React.ReactNode;
 }>) {
   return (
     <html lang="en">
       <body className={ubuntu_mono.className}>{children}</body>
     </html>
-  )
+  );
 }

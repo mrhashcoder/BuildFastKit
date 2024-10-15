@@ -1,11 +1,11 @@
-"use client"
+"use client";
 
-import { zodResolver } from "@hookform/resolvers/zod"
-import { useForm } from "react-hook-form"
-import { useState } from "react"
-import { z } from "zod"
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import { useState } from "react";
+import { z } from "zod";
 
-import { Button } from "@/components/ui/button"
+import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
@@ -13,16 +13,16 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form"
-import { Input } from "@/components/ui/input"
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
 
 const formSchema = z.object({
   email: z.string().email(),
   password: z.string().min(6),
-})
+});
 
 export function Signup({ signup }: any) {
-  const [isLoading, setIsLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(false);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -30,11 +30,11 @@ export function Signup({ signup }: any) {
       email: "",
       password: "",
     },
-  })
+  });
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    setIsLoading(true)
-    console.log("yooooo")
+    setIsLoading(true);
+    console.log("yooooo");
 
     try {
       // const { data, error } = await supabase.auth.signUp({
@@ -50,11 +50,11 @@ export function Signup({ signup }: any) {
       //     router.push('/dashboard')
       // }
 
-      signup(values)
-      setIsLoading(false)
+      signup(values);
+      setIsLoading(false);
     } catch (err) {
-      console.log(err)
-      setIsLoading(false)
+      console.log(err);
+      setIsLoading(false);
     }
   }
 
@@ -95,5 +95,5 @@ export function Signup({ signup }: any) {
         </form>
       </Form>
     </div>
-  )
+  );
 }

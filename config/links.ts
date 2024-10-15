@@ -1,5 +1,4 @@
-import { NavLink } from "@/types"
-import path from "path"
+import { NavLink } from "@/types";
 
 export const privateLinks: NavLink[] = [
   {
@@ -22,7 +21,7 @@ export const privateLinks: NavLink[] = [
     path: "/profile",
     description: "the Profile",
   },
-]
+];
 
 export const publicLinks: NavLink[] = [
   {
@@ -40,8 +39,8 @@ export const publicLinks: NavLink[] = [
     path: "/",
     description: "The root",
   },
-]
+];
 
-export const afterAuthLink: NavLink = privateLinks[0]
+export const afterAuthLink: NavLink = privateLinks[0];
 
-export const authLink: NavLink = publicLinks[0]
+export const authLink: NavLink = publicLinks[0];

@@ -1,11 +1,11 @@
-"use client"
+"use client";
 
-import { zodResolver } from "@hookform/resolvers/zod"
-import { useForm } from "react-hook-form"
-import { z } from "zod"
-import { useState } from "react"
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import { useState } from "react";
 
-import { Button } from "@/components/ui/button"
+import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
@@ -13,20 +13,20 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form"
-import { Input } from "@/components/ui/input"
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
 
 const formSchema = z.object({
   email: z.string().email(),
   password: z.string().min(6),
-})
+});
 
 export function Signin({ login }: any): React.ReactNode {
   const [error, setError] = useState<{
-    success: boolean
-    message: string
-  } | null>()
-  const [isLoading, setIsLoading] = useState(false)
+    success: boolean;
+    message: string;
+  } | null>();
+  const [isLoading, setIsLoading] = useState(false);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -34,11 +34,11 @@ export function Signin({ login }: any): React.ReactNode {
       email: "",
       password: "",
     },
-  })
+  });
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    setError(null)
-    setIsLoading(true)
+    setError(null);
+    setIsLoading(true);
 
     // try {
     // const { data, error } = await supabase.auth.signInWithPassword({
@@ -55,13 +55,13 @@ export function Signin({ login }: any): React.ReactNode {
 
     try {
       // Simulate login call (replace with actual login logic)
-      const res = await login(values)
+      const res = await login(values);
 
-      setError(res)
-      setIsLoading(false)
+      setError(res);
+      setIsLoading(false);
     } catch (err) {
-      console.log(err)
-      setIsLoading(false)
+      console.log(err);
+      setIsLoading(false);
     }
   }
 
@@ -105,5 +105,5 @@ export function Signin({ login }: any): React.ReactNode {
         </form>
       </Form>
     </div>
-  )
+  );
 }

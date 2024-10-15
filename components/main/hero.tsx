@@ -1,6 +1,6 @@
-import React from "react"
-import { Button } from "../ui/button"
-import Image from "next/image"
+import React from "react";
+import { Button } from "../ui/button";
+import Image from "next/image";
 
 function Hero() {
   return (
@@ -31,7 +31,7 @@ function Hero() {
         </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default Hero
+export default Hero;

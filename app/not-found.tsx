@@ -1,5 +1,5 @@
-import Link from "next/link"
-import React from "react"
+import Link from "next/link";
+import React from "react";
 
 function NotFound() {
   return (
@@ -31,7 +31,7 @@ function NotFound() {
         </div>
       </div>
     </section>
-  )
+  );
 }
 
-export default NotFound
+export default NotFound;

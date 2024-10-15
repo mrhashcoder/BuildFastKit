@@ -1,11 +1,11 @@
-import { SiteConfig, ContactConfig } from "@/types"
+import { SiteConfig, ContactConfig } from "@/types";
 
 /* ====================
 [> WEBSITE CONFIG <]
 -- Fill the details about your website
  ==================== */
 
-const baseUrl = "https://localhost:3000"
+const baseUrl = "https://localhost:3000";
 
 export const siteConfig: SiteConfig = {
   name: "BuildFastKit - saas starter by mrhashcoder",
@@ -27,8 +27,8 @@ export const siteConfig: SiteConfig = {
     author: "https://mrhashcoder.in",
   },
   ogImage: `${baseUrl}/og.jpg`,
-}
+};
 
 export const contactConfig: ContactConfig = {
   email: "mrhashcoder@gmail.com",
-}
+};

@@ -1,13 +1,13 @@
-"use client"
+"use client";
 
-import { Button } from "@/components/ui/button"
+import { Button } from "@/components/ui/button";
 // import { supabase } from "@/lib/supabaseAuth"
-import { useRouter } from "next/navigation"
-import { useEffect, useState } from "react"
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 
 export function SignOut({ logout }: any) {
-  const [isLoading, setIsLoading] = useState(false)
-  const router = useRouter()
+  const [isLoading, setIsLoading] = useState(false);
+  const router = useRouter();
 
   // useEffect(() => {
 
@@ -29,7 +29,7 @@ export function SignOut({ logout }: any) {
   // }, [router])
 
   const handleClick = async () => {
-    setIsLoading(true)
+    setIsLoading(true);
 
     try {
       // const { error } = await supabase.auth.signOut()
@@ -40,17 +40,17 @@ export function SignOut({ logout }: any) {
       //     console.log("Signout successful");
       // }
 
-      logout()
-      setIsLoading(false)
+      logout();
+      setIsLoading(false);
     } catch (err) {
-      console.log(err)
-      setIsLoading(false)
+      console.log(err);
+      setIsLoading(false);
     }
-  }
+  };
 
   return (
     <Button onClick={handleClick} disabled={isLoading}>
       Signout
     </Button>
-  )
+  );
 }
