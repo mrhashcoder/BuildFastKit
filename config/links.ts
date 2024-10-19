@@ -1,46 +1,68 @@
 import { NavLink } from "@/types";
 
-export const privateLinks: NavLink[] = [
-  {
+export const privateLinkMap: any = {
+  dashboard: {
     name: "dashboard",
     path: "/dashboard",
     description: "The Dashboard",
   },
-  {
+  private: {
     name: "private",
     path: "/private",
     description: "The Private Route",
   },
-  {
+  invoice: {
     name: "invoice",
     path: "/invoice",
     description: "the Inoivce",
   },
-  {
+  profile: {
     name: "profile",
     path: "/profile",
     description: "the Profile",
   },
-];
+};
 
-export const publicLinks: NavLink[] = [
-  {
-    name: "login",
+export const publicLinkMap: any = {
+  login: {
+    name: "Login",
     path: "/login",
-    description: "the Login",
+    description: "The Login",
   },
-  {
-    name: "signin",
-    path: "/login",
-    description: "the Login",
+  signup: {
+    name: "Signup",
+    path: "/signup",
+    description: "The Signup",
   },
-  {
-    name: "root",
+  home: {
+    name: "Home",
     path: "/",
-    description: "The root",
+    description: "The Home",
   },
+  about: {
+    name: "About",
+    path: "/about",
+    description: "The About",
+  },
+  pricing: {
+    name: "Pricing",
+    path: "/pricing",
+    description: "The Pricing Page",
+  },
+};
+
+export const DashboardLinks: NavLink[] = [
+  privateLinkMap.dashboard,
+  privateLinkMap.private,
 ];
 
-export const afterAuthLink: NavLink = privateLinks[0];
+export const NavbarLinks: NavLink[] = [
+  publicLinkMap.home,
+  publicLinkMap.about,
+  publicLinkMap.pricing,
+  publicLinkMap.login,
+];
 
-export const authLink: NavLink = publicLinks[0];
+export const afterAuthLink: NavLink = privateLinkMap.dashboard;
+
+export const authLink: NavLink = publicLinkMap.login;
