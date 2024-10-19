@@ -1,4 +1,4 @@
-import { afterAuthLink, authLink, privateLinks } from "@/config/links";
+import { afterAuthLink, authLink, privateLinkMap } from "@/config/links";
 import { createServerClient } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
 
@@ -43,7 +43,10 @@ export async function updateSession(request: NextRequest) {
   console.log(user);
 
   const validateUser = (request: NextRequest): boolean => {
-    return privateLinks.some((link) => request.nextUrl.pathname === link.path);
+    const keys = Object.keys(privateLinkMap);
+    return keys.some(
+      (key: string) => request.nextUrl.pathname === privateLinkMap[key].path
+    );
   };
 
   if (!user && validateUser(request)) {

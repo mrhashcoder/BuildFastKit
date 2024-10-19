@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { siteConfig } from "@/config/site";
 import { Ubuntu_Mono, Courier_Prime } from "next/font/google";
 import "./globals.css";
+import { ThemeProvider } from "@/components/providers/theme-provider";
+import NavBar from "@/components/main/navbar";
 
 const ubuntu_mono = Ubuntu_Mono({
   weight: ["400", "700"],
@@ -63,7 +65,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={ubuntu_mono.className}>{children}</body>
+      <body className={`${ubuntu_mono.className}  bg-background text-primary`}>
+        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
+          <NavBar />
+          {children}
+        </ThemeProvider>
+      </body>
     </html>
   );
 }
