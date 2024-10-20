@@ -1,11 +1,10 @@
 import { Signin } from "@/components/main/signin";
-import { login } from "@/lib/supabaseService";
 import React from "react";
 
 const page = () => {
   return (
     <div className="h-screen flex justify-center items-center">
-      <Signin login={login} />
+      <Signin />
     </div>
   );
 };

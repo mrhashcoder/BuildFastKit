@@ -30,7 +30,7 @@ export const publicLinkMap: any = {
     description: "The Login",
   },
   signup: {
-    name: "Signup",
+    name: "Register",
     path: "/signup",
     description: "The Signup",
   },
@@ -65,3 +65,5 @@ export const NavbarLinks: NavLink[] = [
 export const afterAuthLink: NavLink = privateLinkMap.dashboard;
 
 export const authLink: NavLink = publicLinkMap.login;
+
+export const authRegisterLink: NavLink = publicLinkMap.signup;

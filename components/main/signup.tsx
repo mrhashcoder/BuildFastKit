@@ -15,13 +15,14 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { useAuth } from "../providers/supabase-auth-provider";
 
 const formSchema = z.object({
   email: z.string().email(),
   password: z.string().min(6),
 });
 
-export function Signup({ signup }: any) {
+export function Signup() {
   const [isLoading, setIsLoading] = useState(false);
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -31,6 +32,8 @@ export function Signup({ signup }: any) {
       password: "",
     },
   });
+
+  const { signUp } = useAuth();
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     setIsLoading(true);
@@ -50,7 +53,8 @@ export function Signup({ signup }: any) {
       //     router.push('/dashboard')
       // }
 
-      signup(values);
+      const res = await signUp(values.email, values.password);
+      console.log(res);
       setIsLoading(false);
     } catch (err) {
       console.log(err);
@@ -59,12 +63,12 @@ export function Signup({ signup }: any) {
   }
 
   return (
-    <div className="border border-primary w-lg rounded-md shadow-primary shadow-lg p-16">
-      <h1 className="text-center font-bold">Signup</h1>
+    <div className="rounded-md border border-primary rounded-md shadow-primary shadow-lg p-8">
+      <h1 className="text-center font-bold">Sign Up</h1>
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className="space-y-8 flex flex-col items-center"
+          className="space-y-4 flex items-center flex-col"
         >
           <FormField
             control={form.control}
@@ -77,7 +81,7 @@ export function Signup({ signup }: any) {
                     type="email"
                     placeholder="email"
                     {...field}
-                    className="bg-forground w-80"
+                    className="bg-forground w-48"
                   />
                 </FormControl>
                 <FormMessage />
@@ -94,7 +98,7 @@ export function Signup({ signup }: any) {
                   <Input
                     type="password"
                     placeholder="password"
-                    className="bg-forground w-80"
+                    className="bg-forground w-48"
                     {...field}
                   />
                 </FormControl>
@@ -103,7 +107,7 @@ export function Signup({ signup }: any) {
             )}
           />
           <Button type="submit" disabled={isLoading}>
-            Signup
+            Sign Up
           </Button>
         </form>
       </Form>

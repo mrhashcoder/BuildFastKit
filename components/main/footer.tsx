@@ -15,7 +15,7 @@ export default function Footer() {
     );
   });
   return (
-    <footer className="flex flex-wrap items-center justify-between px-4 py-2 bg-background my-8">
+    <footer className="flex flex-wrap items-start justify-between px-4 py-2 bg-background my-8">
       <div className="flex flex-col gap-4 my-8 md:basis-2/3">
         <div className="flex items-center gap-2">
           <Icons.mountainIcon className="h-6 w-6" />

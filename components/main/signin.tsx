@@ -15,18 +15,21 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { useAuth } from "../providers/supabase-auth-provider";
 
 const formSchema = z.object({
   email: z.string().email(),
   password: z.string().min(6),
 });
 
-export function Signin({ login }: any): React.ReactNode {
+export function Signin(): React.ReactNode {
   const [error, setError] = useState<{
     success: boolean;
     message: string;
   } | null>();
   const [isLoading, setIsLoading] = useState(false);
+
+  const { signIn } = useAuth();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -55,9 +58,9 @@ export function Signin({ login }: any): React.ReactNode {
 
     try {
       // Simulate login call (replace with actual login logic)
-      const res = await login(values);
+      const res = await signIn(values.email, values.password);
+      console.log(res);
 
-      setError(res);
       setIsLoading(false);
     } catch (err) {
       console.log(err);
@@ -66,12 +69,12 @@ export function Signin({ login }: any): React.ReactNode {
   }
 
   return (
-    <div className="rounded-md border border-primary w-lg rounded-md shadow-primary shadow-lg p-16">
+    <div className="rounded-md border border-primary rounded-md shadow-primary shadow-lg p-8">
       <h1 className="text-center font-bold">Login</h1>
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className="space-y-8 flex items-center flex-col"
+          className="space-y-4 flex items-center flex-col"
         >
           <FormField
             control={form.control}
@@ -84,7 +87,7 @@ export function Signin({ login }: any): React.ReactNode {
                     type="email"
                     placeholder="email"
                     {...field}
-                    className="bg-forground w-80"
+                    className="bg-forground w-48"
                   />
                 </FormControl>
                 <FormMessage />
@@ -101,7 +104,7 @@ export function Signin({ login }: any): React.ReactNode {
                   <Input
                     type="password"
                     placeholder="password"
-                    className="bg-forground w-80"
+                    className="bg-forground w-48"
                     {...field}
                   />
                 </FormControl>
@@ -113,7 +116,7 @@ export function Signin({ login }: any): React.ReactNode {
             <p className="text-sm text-red-500">{error?.message}</p>
           )}
           <Button type="submit" disabled={isLoading}>
-            Submit
+            Login
           </Button>
         </form>
       </Form>

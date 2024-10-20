@@ -1,13 +1,12 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-// import { supabase } from "@/lib/supabaseAuth"
-import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { useAuth } from "../providers/supabase-auth-provider";
 
-export function SignOut({ logout }: any) {
+export function SignOut() {
   const [isLoading, setIsLoading] = useState(false);
-  const router = useRouter();
+  const { signOut } = useAuth();
 
   // useEffect(() => {
 
@@ -40,7 +39,7 @@ export function SignOut({ logout }: any) {
       //     console.log("Signout successful");
       // }
 
-      logout();
+      signOut();
       setIsLoading(false);
     } catch (err) {
       console.log(err);

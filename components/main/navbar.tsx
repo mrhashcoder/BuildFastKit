@@ -1,13 +1,24 @@
+"use client";
 import Link from "next/link";
 import { Sheet, SheetTrigger, SheetContent } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
 import { ModeToggle } from "../core/mode-toggle";
-import { DashboardLinks, NavbarLinks } from "@/config/links";
+import {
+  authLink,
+  authRegisterLink,
+  DashboardLinks,
+  NavbarLinks,
+} from "@/config/links";
 import { Icons } from "../ui/icons";
 import { cn } from "@/lib/utils";
 import { buttonVariants } from "@/components/ui/button";
+import { useAuth } from "@/components/providers/supabase-auth-provider";
+import { LoginButton, LogoutButton, SignUpButton } from "../core/auth-buttons";
 
 export default function NavBar() {
+  const { isAuthenticated } = useAuth();
+  console.log(isAuthenticated);
+
   const NavBarLinkGroupHTML = NavbarLinks.map((link) => {
     return (
       <Link
@@ -44,6 +55,16 @@ export default function NavBar() {
       {/* Top Navbar Data Links Goes inside this div */}
       <div className="hidden md:flex items-center gap-4">
         {NavBarLinkGroupHTML}
+        {isAuthenticated ? (
+          <>
+            <LogoutButton width={5} />
+          </>
+        ) : (
+          <>
+            <SignUpButton width={5} />
+            <LoginButton width={5} />
+          </>
+        )}
         <ModeToggle />
       </div>
 
@@ -65,17 +86,45 @@ export default function NavBar() {
           </SheetTrigger>
           <SheetContent
             side="left"
-            className="rounded-md border-y-1 border-primary overflow-auto"
+            className="rounded-md border-y-1 border-primary"
           >
-            <div className="flex flex-col items-start divide-y divide-primary">
-              <div className="flex flex-col divide-y divide-primary items-start w-md py-4">
-                {NavBarLinkGroupHTML}
+            <div className="flex h-full flex-col justify-between items-start">
+              <div>
+                <div className="flex flex-col divide-y divide-primary items-start w-md py-4">
+                  {NavBarLinkGroupHTML}
+                </div>
+
+                <div className="flex flex-col divide-y divide-primary items-start w-md py-4">
+                  {DashboardLinkGroupHTML}
+                </div>
               </div>
 
-              <div className="flex flex-col divide-y divide-primary items-start w-md py-4">
-                {DashboardLinkGroupHTML}
-              </div>
+              {isAuthenticated ? (
+                <div className="w-full flex flex-wrap items-center justify-end ">
+                  <LogoutButton width={12} />
+                </div>
+              ) : (
+                <div className="w-full flex flex-wrap items-center justify-end ">
+                  <Link
+                    href={authLink.path}
+                    className={`w-[5rem] ${cn(buttonVariants({ size: "lg" }))} text-lg font-medium m-2`}
+                    prefetch={false}
+                    key={authLink.name}
+                  >
+                    {authLink.name}
+                  </Link>
+                  <Link
+                    href={authRegisterLink.path}
+                    className={`w-[5rem] ${cn(buttonVariants({ size: "lg" }))} text-lg font-medium m-2`}
+                    prefetch={false}
+                    key={authRegisterLink.name}
+                  >
+                    {authRegisterLink.name}
+                  </Link>
+                </div>
+              )}
             </div>
+            <div className=""></div>
           </SheetContent>
         </Sheet>
       </div>

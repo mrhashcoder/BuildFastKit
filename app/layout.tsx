@@ -5,6 +5,10 @@ import "./globals.css";
 import { ThemeProvider } from "@/components/providers/theme-provider";
 import NavBar from "@/components/main/navbar";
 import Footer from "@/components/main/footer";
+import SupabaseProvider from "@/components/providers/supabase-provider";
+import createClient from "@/components/providers/supabase-server";
+import SupabaseAuthProvider from "@/components/providers/supabase-auth-provider";
+import { Toaster } from "@/components/ui/toaster";
 
 const ubuntu_mono = Ubuntu_Mono({
   weight: ["400", "700"],
@@ -59,19 +63,28 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const supabase = createClient();
+  const {
+    data: { session },
+  } = await supabase.auth.getSession();
   return (
     <html lang="en">
       <body className={`${ubuntu_mono.className}  bg-background text-primary`}>
-        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
-          <NavBar />
-          {children}
-          <Footer />
-        </ThemeProvider>
+        <SupabaseProvider>
+          <SupabaseAuthProvider serverSession={session}>
+            <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
+              <NavBar />
+              {children}
+              <Footer />
+              <Toaster />
+            </ThemeProvider>
+          </SupabaseAuthProvider>
+        </SupabaseProvider>
       </body>
     </html>
   );
