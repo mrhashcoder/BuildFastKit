@@ -4,6 +4,8 @@ import { Button } from "@/components/ui/button";
 import { ModeToggle } from "../core/mode-toggle";
 import { DashboardLinks, NavbarLinks } from "@/config/links";
 import { Icons } from "../ui/icons";
+import { cn } from "@/lib/utils";
+import { buttonVariants } from "@/components/ui/button";
 
 export default function NavBar() {
   const NavBarLinkGroupHTML = NavbarLinks.map((link) => {
@@ -33,14 +35,14 @@ export default function NavBar() {
   });
 
   return (
-    <div className="flex items-center justify-between px-4 py-2 bg-background">
-      <Link href="#" className="flex items-center gap-2" prefetch={false}>
+    <header className="flex items-center justify-between px-4 py-2 bg-background">
+      <Link href="/" className="flex items-center gap-2" prefetch={false}>
         <Icons.mountainIcon className="h-6 w-6" />
         <span className="text-xl font-bold">BuildFastKit</span>
       </Link>
 
       {/* Top Navbar Data Links Goes inside this div */}
-      <div className="hidden md:flex gap-4">
+      <div className="hidden md:flex items-center gap-4">
         {NavBarLinkGroupHTML}
         <ModeToggle />
       </div>
@@ -77,6 +79,6 @@ export default function NavBar() {
           </SheetContent>
         </Sheet>
       </div>
-    </div>
+    </header>
   );
 }

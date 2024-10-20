@@ -60,7 +60,6 @@ export const NavbarLinks: NavLink[] = [
   publicLinkMap.home,
   publicLinkMap.about,
   publicLinkMap.pricing,
-  publicLinkMap.login,
 ];
 
 export const afterAuthLink: NavLink = privateLinkMap.dashboard;

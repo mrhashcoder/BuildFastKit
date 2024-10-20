@@ -22,6 +22,11 @@ import { FaUserAlt, FaSort } from "react-icons/fa";
 import { ImSpinner8, ImStatsBars } from "react-icons/im";
 import { RxMixerHorizontal } from "react-icons/rx";
 import { LuSettings } from "react-icons/lu";
+import {
+  GitHubLogoIcon,
+  TwitterLogoIcon,
+  LinkedInLogoIcon,
+} from "@radix-ui/react-icons";
 
 export type IconKeys = keyof typeof icons;
 
@@ -136,6 +141,9 @@ const icons = {
   statsBar: ImStatsBars,
   mixer: RxMixerHorizontal,
   check: BsCheck2,
+  twitter: TwitterLogoIcon,
+  github: GitHubLogoIcon,
+  linkedin: LinkedInLogoIcon,
 };
 
 export const Icons: IconsType = icons;

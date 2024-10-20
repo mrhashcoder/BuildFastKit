@@ -59,18 +59,26 @@ export function Signup({ signup }: any) {
   }
 
   return (
-    <div className="border p-5 rounded-md">
-      <h1 className="text-center mb-4 font-bold">Signup</h1>
+    <div className="border border-primary w-lg rounded-md shadow-primary shadow-lg p-16">
+      <h1 className="text-center font-bold">Signup</h1>
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+        <form
+          onSubmit={form.handleSubmit(onSubmit)}
+          className="space-y-8 flex flex-col items-center"
+        >
           <FormField
             control={form.control}
             name="email"
             render={({ field }) => (
-              <FormItem>
+              <FormItem className="">
                 <FormLabel>Email</FormLabel>
                 <FormControl>
-                  <Input type="email" placeholder="email" {...field} />
+                  <Input
+                    type="email"
+                    placeholder="email"
+                    {...field}
+                    className="bg-forground w-80"
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -83,14 +91,19 @@ export function Signup({ signup }: any) {
               <FormItem>
                 <FormLabel>Password</FormLabel>
                 <FormControl>
-                  <Input type="password" placeholder="password" {...field} />
+                  <Input
+                    type="password"
+                    placeholder="password"
+                    className="bg-forground w-80"
+                    {...field}
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
             )}
           />
           <Button type="submit" disabled={isLoading}>
-            Submit
+            Signup
           </Button>
         </form>
       </Form>

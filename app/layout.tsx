@@ -4,6 +4,7 @@ import { Ubuntu_Mono, Courier_Prime } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/providers/theme-provider";
 import NavBar from "@/components/main/navbar";
+import Footer from "@/components/main/footer";
 
 const ubuntu_mono = Ubuntu_Mono({
   weight: ["400", "700"],
@@ -69,6 +70,7 @@ export default function RootLayout({
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
           <NavBar />
           {children}
+          <Footer />
         </ThemeProvider>
       </body>
     </html>

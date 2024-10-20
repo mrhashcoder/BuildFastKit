@@ -66,18 +66,26 @@ export function Signin({ login }: any): React.ReactNode {
   }
 
   return (
-    <div className="border p-5 rounded-md">
-      <h1 className="text-center mb-4 font-bold">Login</h1>
+    <div className="rounded-md border border-primary w-lg rounded-md shadow-primary shadow-lg p-16">
+      <h1 className="text-center font-bold">Login</h1>
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+        <form
+          onSubmit={form.handleSubmit(onSubmit)}
+          className="space-y-8 flex items-center flex-col"
+        >
           <FormField
             control={form.control}
             name="email"
             render={({ field }) => (
-              <FormItem>
+              <FormItem className="">
                 <FormLabel>Email</FormLabel>
                 <FormControl>
-                  <Input type="email" placeholder="email" {...field} />
+                  <Input
+                    type="email"
+                    placeholder="email"
+                    {...field}
+                    className="bg-forground w-80"
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -90,7 +98,12 @@ export function Signin({ login }: any): React.ReactNode {
               <FormItem>
                 <FormLabel>Password</FormLabel>
                 <FormControl>
-                  <Input type="password" placeholder="password" {...field} />
+                  <Input
+                    type="password"
+                    placeholder="password"
+                    className="bg-forground w-80"
+                    {...field}
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
