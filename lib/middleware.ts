@@ -40,8 +40,6 @@ export async function updateSession(request: NextRequest) {
     data: { user },
   } = await supabase.auth.getUser();
 
-  console.log(user);
-
   const validateUser = (request: NextRequest): boolean => {
     const keys = Object.keys(privateLinkMap);
     return keys.some(
