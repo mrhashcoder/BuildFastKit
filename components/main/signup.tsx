@@ -12,7 +12,6 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useAuth } from "../providers/supabase-auth-provider";
@@ -114,15 +113,6 @@ export function Signup() {
               {passwordError && (
                 <p className="text-sm text-red-500">{passwordError}</p>
               )}
-            </div>
-            <div className="flex items-center space-x-2">
-              <Checkbox id="remember" name="remember" />
-              <Label
-                htmlFor="remember"
-                className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-              >
-                Remember me
-              </Label>
             </div>
           </CardContent>
           <CardFooter className="flex flex-col space-y-4">
