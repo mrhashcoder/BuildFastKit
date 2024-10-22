@@ -88,20 +88,6 @@ export default function SupabaseAuthProvider({
     return user;
   };
 
-  // Get USER
-  // const getUser = async () => {
-  //   const { data: user, error } = await supabase
-  //     .from("profiles")
-  //     .select("*")
-  //     .eq("id", serverSession?.user?.id)
-  //     .single();
-  //   if (error) {
-  //     return null;
-  //   } else {
-  //     return user;
-  //   }
-  // };
-
   const {
     data: user,
     error,
