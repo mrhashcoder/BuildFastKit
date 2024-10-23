@@ -76,3 +76,36 @@ body {
     @apply bg-background text-foreground;
   }
 }
+
+.react-player {
+  height: 25vh !important;
+  width: 100% !important;
+}
+
+@media only screen and (max-width: 640px) {
+  .react-player {
+    height: 23vh !important;
+  }
+}
+@media only screen and (min-width: 640px) and (max-width: 900px) {
+  .react-player {
+    height: 47vh !important;
+  }
+}
+@media only screen and (min-width: 900px) and (max-width: 1024px) {
+  .react-player {
+    height: 54vh !important;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  .react-player {
+    height: 83vh !important;
+  }
+}
+
+@layer utilities {
+  .wrapper {
+    @apply max-w-7xl 2xl:max-w-[90rem] lg:mx-auto py-5 px-5 md:px-12 w-full;
+  }
+}
