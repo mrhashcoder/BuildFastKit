@@ -1,21 +1,18 @@
-'use client'
+"use client";
 
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from "react";
 import ReactPlayer from "react-player";
 
-
 const VideoPlayer = () => {
-
   // to avoid hydration issue
-  const [isClient, setIsClient] = useState(false)
- 
-  useEffect(() => {
-      setIsClient(true)
-  }, [])
+  const [isClient, setIsClient] = useState(false);
 
-  return ( 
-    isClient
-    ? (<main className="wrapper">
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  return isClient ? (
+    <main className="wrapper">
       <div className="flex mt-5">
         <div className="rounded-xl border-black border-[1px] overflow-hidden w-full">
           <ReactPlayer
@@ -29,9 +26,10 @@ const VideoPlayer = () => {
           />
         </div>
       </div>
-    </main>)
-    : <></>
-  )
-}
+    </main>
+  ) : (
+    <></>
+  );
+};
 
-export default VideoPlayer
+export default VideoPlayer;
