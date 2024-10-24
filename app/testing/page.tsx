@@ -1,7 +1,7 @@
+import React from "react";
 import { AppSidebar } from "@/components/main/app-sidebar";
 import { Progressbar } from "@/components/main/progressbar";
 import Topbar from "@/components/main/topbar";
-import React from "react";
 import PricingCards from '@/components/main/pricingCards'
 import VideoPlayer from '@/components/main/videoPlayer'
  
@@ -10,12 +10,12 @@ import VideoPlayer from '@/components/main/videoPlayer'
 function page() {
 
   return (
-     <div className="">
+     <div>
       {/* <Topbar />
         <Progressbar /> */}
-      <AppSidebar />
-        {/* <VideoPlayer /> */}
-        <PricingCards />
+      {/* <AppSidebar /> */}
+      {/* <VideoPlayer /> */}
+      <PricingCards />
     </div>
   );
 }
