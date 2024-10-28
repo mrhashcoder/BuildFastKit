@@ -18,7 +18,6 @@ import { SidebarTrigger } from "../ui/sidebar";
 
 export default function NavBar() {
   const { isAuthenticated } = useAuth();
-  console.log(isAuthenticated);
 
   const NavBarLinkGroupHTML = NavbarLinks.map((link) => {
     return (
