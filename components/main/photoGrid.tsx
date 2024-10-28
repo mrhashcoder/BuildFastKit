@@ -52,6 +52,9 @@ export default function PhotoGrid({ photos }: PhotoGridProps) {
         <div>
           {renderPhoto(5)}
         </div>
+        <div>
+          {renderPhoto(6)}
+        </div>
       </div>
     </div>
   )

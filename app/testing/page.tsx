@@ -21,8 +21,8 @@ function page() {
       {/* <AppSidebar /> */}
       {/* <VideoPlayer /> */}
       {/* <PricingCards /> */}
-      {/* <PhotoGrid photos={[]} />*/}
-      <ContactUs />
+      {/* <PhotoGrid photos={ ]} /> */}
+      {/* <ContactUs /> */}
       {/* <Faq /> */}
       {/* <Testimonial_1 /> */}
       {/* <Testimonial_2 /> */}
