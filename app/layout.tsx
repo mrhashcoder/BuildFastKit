@@ -9,7 +9,6 @@ import SupabaseProvider from "@/components/providers/supabase-provider";
 import createClient from "@/components/providers/supabase-server";
 import SupabaseAuthProvider from "@/components/providers/supabase-auth-provider";
 import { Toaster } from "@/components/ui/toaster";
-import ProviderSidebar from "@/components/providers/sidebar-provider";
 
 const ubuntu_mono = Ubuntu_Mono({
   weight: ["400", "700"],
@@ -79,14 +78,12 @@ export default async function RootLayout({
         <SupabaseProvider>
           <SupabaseAuthProvider serverSession={session}>
             <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
-              <ProviderSidebar>
                 <div>
                   <NavBar />
                   {children}
                   <Footer />
                   <Toaster />
                 </div>
-              </ProviderSidebar>
             </ThemeProvider>
           </SupabaseAuthProvider>
         </SupabaseProvider>

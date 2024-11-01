@@ -39,7 +39,7 @@ export const plans = [
         { name: "24/7 dedicated support", included: true },
         { name: "Multiple custom domains", included: true },
       ],
-      color: "bg-secondary",
+      color: "bg-white",
       textColor: "text-secondary-foreground",
     },
   ]

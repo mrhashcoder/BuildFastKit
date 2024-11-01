@@ -21,7 +21,6 @@ const VideoPlayer = () => {
             controls
             width="100%"
             height="100%"
-            playing={true}
             pip
           />
         </div>
