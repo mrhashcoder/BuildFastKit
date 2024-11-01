@@ -14,7 +14,6 @@ import { cn } from "@/lib/utils";
 import { buttonVariants } from "@/components/ui/button";
 import { useAuth } from "@/components/providers/supabase-auth-provider";
 import { LoginButton, LogoutButton, SignUpButton } from "../core/auth-buttons";
-import { SidebarTrigger } from "../ui/sidebar";
 
 export default function NavBar() {
   const { isAuthenticated } = useAuth();
@@ -48,9 +47,6 @@ export default function NavBar() {
   return (
     <header className="w-full h-full flex items-center justify-between px-4 py-2 bg-background">
       <div className="flex gap-2 items-center">
-        <div className="flex max-h-fit">
-          <SidebarTrigger />
-        </div>
         <Link href="/" className="flex items-center gap-2" prefetch={false}>
           <Icons.mountainIcon className="h-6 w-6" />
           <span className="text-xl font-bold">BuildFastKit</span>

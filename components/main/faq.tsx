@@ -8,7 +8,7 @@ import {
 export default function Faq() {
     return (
         <div className="flex justify-center my-5">
-            <Accordion type="single" collapsible className="w-1/4">
+            <Accordion type="single" collapsible className="w-1/2">
                 <AccordionItem value="item-1">
                 <AccordionTrigger>Is it accessible?</AccordionTrigger>
                 <AccordionContent>
