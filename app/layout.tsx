@@ -78,12 +78,12 @@ export default async function RootLayout({
         <SupabaseProvider>
           <SupabaseAuthProvider serverSession={session}>
             <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
-                <div>
-                  <NavBar />
-                  {children}
-                  <Footer />
-                  <Toaster />
-                </div>
+              <div>
+                <NavBar />
+                {children}
+                <Footer />
+                <Toaster />
+              </div>
             </ThemeProvider>
           </SupabaseAuthProvider>
         </SupabaseProvider>

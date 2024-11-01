@@ -1,35 +1,31 @@
-'use client'
+"use client";
 
-import { useState } from 'react'
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
-import { Label } from "@/components/ui/label"
-import { useSupabase } from '../providers/supabase-provider'
-import { useRouter } from 'next/navigation'
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Label } from "@/components/ui/label";
+import { useRouter } from "next/navigation";
+import { createQuery } from "@/actions/createquery";
 
 export default function ContactUs() {
-    const router = useRouter()
-    const supabase = useSupabase();
-    const [name, setName] = useState('')
-    const [email, setEmail] = useState('')
-    const [query, setQuery] = useState('')
+  const router = useRouter();
 
-    const handleSubmit = async (e: React.FormEvent) => {
-        e.preventDefault()
-        
-        try{
-            await supabase.from("user-query").upsert([{name, email, query}])
-            console.log("done")
-            router.push("/");
-        } catch (error: any) {
-            console.log(error.message)
-        }
-    console.log('Form submitted:', { name, email, query })
-    setName('')
-    setEmail('')
-    setQuery('')
-  }
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    const formData = new FormData(e.currentTarget);
+
+    const name = formData.get("name") as string;
+    const email = formData.get("email") as string;
+    const phoneno = formData.get("phone-no") as string;
+    const query = formData.get("query") as string;
+    try {
+      await createQuery({ name, email, phoneno, query });
+      router.push("/");
+    } catch (error: any) {
+      console.log(error);
+    }
+  };
 
   return (
     <div className="max-w-xl mx-auto my-5 p-6 bg-white border-2 rounded-lg">
@@ -37,38 +33,36 @@ export default function ContactUs() {
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
           <Label htmlFor="name">Your Name</Label>
-          <Input
-            id="name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            placeholder="John Doe"
-            required
-          />
+          <Input id="name" name="name" placeholder="John Doe" required />
         </div>
         <div>
           <Label htmlFor="email">Your Email</Label>
           <Input
             id="email"
+            name="email"
             type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
             placeholder="john@example.com"
             required
           />
         </div>
         <div>
+          <Label htmlFor="phone-no">Phone no.</Label>
+          <Input id="phone-no" name="phone-no" placeholder="xxxxx xxxxx" />
+        </div>
+        <div>
           <Label htmlFor="query">Your Query</Label>
           <Textarea
             id="query"
-            value={query}
-            onChange={(e: any) => setQuery(e.target.value)}
+            name="query"
             placeholder="How can we help you?"
             className="min-h-[150px]"
             required
           />
         </div>
-        <Button type="submit" className="w-full">Submit</Button>
+        <Button type="submit" className="w-full">
+          Submit
+        </Button>
       </form>
     </div>
-  )
+  );
 }
