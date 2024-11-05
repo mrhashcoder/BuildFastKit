@@ -66,7 +66,7 @@ export default function PricingCards() {
               </CardContent>
               <CardFooter>
                 <Button
-                  className={`w-full ${plan.color === "bg-white" ? "bg-primary text-primary-foreground hover:bg-primary/90" : "bg-white text-gray-900 hover:bg-gray-100"}`}
+                  className={`w-full ${plan.color === "bg-background" ? "bg-primary text-primary-foreground hover:bg-primary/90" : "bg-background text-primary hover:bg-background/90"}`}
                 >
                   Get started
                 </Button>
