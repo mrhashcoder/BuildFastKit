@@ -10,8 +10,8 @@ export const plans = [
       { name: "24/7 support", included: false },
       { name: "Custom domain", included: false },
     ],
-    color: "bg-white",
-    textColor: "text-gray-900",
+    color: "bg-background",
+    textColor: "text-primary",
   },
   {
     name: "Pro",
@@ -39,7 +39,7 @@ export const plans = [
       { name: "24/7 dedicated support", included: true },
       { name: "Multiple custom domains", included: true },
     ],
-    color: "bg-white",
-    textColor: "text-secondary-foreground",
+    color: "bg-background",
+    textColor: "text-primary",
   },
 ];
