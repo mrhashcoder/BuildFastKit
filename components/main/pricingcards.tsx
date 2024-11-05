@@ -15,7 +15,7 @@ import { plans } from "@/config/pricingPlan";
 
 export default function PricingCards() {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-100 to-gray-200 p-4">
+    <div className="min-h-screen flex items-center justify-center from-gray-100 to-gray-200 p-4">
       <div className="flex flex-col lg:flex-row gap-8 max-w-6xl mx-auto">
         {plans.map((plan, index) => (
           <motion.div
@@ -66,7 +66,7 @@ export default function PricingCards() {
               </CardContent>
               <CardFooter>
                 <Button
-                  className={`w-full ${plan.color === "bg-white" ? "bg-primary text-primary-foreground hover:bg-primary/90" : "bg-white text-gray-900 hover:bg-gray-100"}`}
+                  className={`w-full ${plan.color === "bg-background" ? "bg-primary text-primary-foreground hover:bg-primary/90" : "bg-background text-primary hover:bg-background/90"}`}
                 >
                   Get started
                 </Button>
