@@ -23,3 +23,8 @@ export type NavLink = {
   path: string;
   description: string;
 };
+
+export interface SidebarLinks {
+  title: string;
+  route: string;
+}

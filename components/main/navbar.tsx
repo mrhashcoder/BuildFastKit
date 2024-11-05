@@ -45,7 +45,7 @@ export default function NavBar() {
   });
 
   return (
-    <header className="w-full h-full flex items-center justify-between px-4 py-2 bg-background">
+    <header className="sticky inset-x-0 top-0 z-30 w-full flex items-center justify-between px-4 py-2 bg-background">
       <div className="flex gap-2 items-center">
         <Link href="/" className="flex items-center gap-2" prefetch={false}>
           <Icons.mountainIcon className="h-6 w-6" />

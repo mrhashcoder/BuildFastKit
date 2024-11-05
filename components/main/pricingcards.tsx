@@ -15,7 +15,7 @@ import { plans } from "@/config/pricingPlan";
 
 export default function PricingCards() {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-100 to-gray-200 p-4">
+    <div className="min-h-screen flex items-center justify-center from-gray-100 to-gray-200 p-4">
       <div className="flex flex-col lg:flex-row gap-8 max-w-6xl mx-auto">
         {plans.map((plan, index) => (
           <motion.div

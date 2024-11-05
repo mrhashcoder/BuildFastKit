@@ -1,4 +1,4 @@
-import { NavLink } from "@/types";
+import { NavLink, SidebarLinks } from "@/types";
 
 export const privateLinkMap: any = {
   dashboard: {
@@ -67,3 +67,18 @@ export const afterAuthLink: NavLink = privateLinkMap.dashboard;
 export const authLink: NavLink = publicLinkMap.login;
 
 export const authRegisterLink: NavLink = publicLinkMap.signup;
+
+export const sidebarLinks: SidebarLinks[] = [
+  {
+    title: "Home",
+    route: "/",
+  },
+  {
+    title: "Signup",
+    route: "/signup",
+  },
+  {
+    title: "Testing",
+    route: "/testing",
+  },
+];

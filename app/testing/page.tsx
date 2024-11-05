@@ -14,11 +14,11 @@ function page() {
       {/* <Topbar />
       <Progressbar /> */}
       {/* <VideoPlayer /> */}
-      {/* <PricingCards /> */}
+      <PricingCards />
       {/* <PhotoGrid photos={} /> */}
       <ContactUs />
-      {/* <Faq /> */}
-      {/* <Testimonial index={1} /> */}
+      <Faq />
+      <Testimonial index={1} />
     </div>
   );
 }
