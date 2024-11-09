@@ -11,6 +11,7 @@ import Testimonial from "@/components/main/testimonial";
 import Faq from "@/components/main/faq";
 import FileUpload from "@/components/main/file-upload";
 import Snippet from "@/components/main/code-snippet";
+import CodeEditor from "@/components/main/code-editor";
 
 function page() {
   const [publicId, setPublicId] = useState("");
@@ -35,6 +36,7 @@ function page() {
       setPublicId={setPublicId}
        /> */}
       <Snippet />
+      <CodeEditor />
     </div>
   );
 }
