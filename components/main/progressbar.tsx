@@ -3,7 +3,7 @@
 import * as React from "react";
 import { Progress } from "@/components/ui/progress";
 
-export function Progressbar() {
+export default function Progressbar() {
   const [progress, setProgress] = React.useState(10);
 
   React.useEffect(() => {
