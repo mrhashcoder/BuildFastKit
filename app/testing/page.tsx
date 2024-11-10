@@ -12,6 +12,7 @@ import Faq from "@/components/main/faq";
 import FileUpload from "@/components/main/file-upload";
 import Snippet from "@/components/main/code-snippet";
 import CodeEditor from "@/components/main/code-editor";
+import TextEditor from "@/components/main/text-editor";
 
 function page() {
   const [publicId, setPublicId] = useState("");
@@ -35,8 +36,9 @@ function page() {
       }}
       setPublicId={setPublicId}
        /> */}
-      <Snippet />
-      <CodeEditor />
+      {/* <Snippet /> */}
+      {/* <CodeEditor /> */}
+      <TextEditor />
     </div>
   );
 }
