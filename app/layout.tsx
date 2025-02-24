@@ -5,9 +5,7 @@ import "./globals.css";
 import { ThemeProvider } from "@/components/providers/theme-provider";
 import NavBar from "@/components/main/navbar";
 import Footer from "@/components/main/footer";
-import SupabaseProvider from "@/components/providers/supabase-provider";
-import createClient from "@/components/providers/supabase-server";
-import SupabaseAuthProvider from "@/components/providers/supabase-auth-provider";
+import StrapiAuthProvider from "@/components/providers/strapi-auth-provider";
 import { Toaster } from "@/components/ui/toaster";
 
 const ubuntu_mono = Ubuntu_Mono({
@@ -68,25 +66,19 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const supabase = createClient();
-  const {
-    data: { session },
-  } = await supabase.auth.getSession();
   return (
     <html lang="en">
       <body className={`${ubuntu_mono.className} bg-background text-primary`}>
-        <SupabaseProvider>
-          <SupabaseAuthProvider serverSession={session}>
-            <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
-              <div>
-                <NavBar />
-                {children}
-                <Footer />
-                <Toaster />
-              </div>
-            </ThemeProvider>
-          </SupabaseAuthProvider>
-        </SupabaseProvider>
+        <StrapiAuthProvider>
+          <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
+            <div>
+              <NavBar />
+              {children}
+              <Footer />
+              <Toaster />
+            </div>
+          </ThemeProvider>
+        </StrapiAuthProvider>
       </body>
     </html>
   );

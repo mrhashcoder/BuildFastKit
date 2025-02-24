@@ -2,7 +2,7 @@
 
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
-import { useAuth } from "../providers/supabase-auth-provider";
+import { useAuth } from "../providers/strapi-auth-provider";
 
 export function SignOut() {
   const [isLoading, setIsLoading] = useState(false);

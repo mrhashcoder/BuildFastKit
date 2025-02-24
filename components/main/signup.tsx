@@ -14,9 +14,12 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { useAuth } from "../providers/supabase-auth-provider";
+import { useAuth } from "../providers/strapi-auth-provider";
 
 const formSchema = z.object({
+  username: z
+    .string()
+    .min(3, { message: 'Username must be at least 6 characters long"' }),
   email: z.string().email({ message: "Invalid email address" }),
   password: z
     .string()
@@ -29,6 +32,7 @@ export function Signup() {
   const [error, setError] = useState<string | null>(null);
   const [emailError, setEmailError] = useState<string | null>(null);
   const [passwordError, setPasswordError] = useState<string | null>(null);
+  const [usernameError, setUsernameError] = useState<string | null>(null);
 
   const { signUp } = useAuth();
 
@@ -42,17 +46,22 @@ export function Signup() {
     setIsLoading(true);
 
     const formData = new FormData(e.currentTarget);
+    const username = formData.get("username") as string;
     const email = formData.get("email") as string;
     const password = formData.get("password") as string;
-
     try {
-      const validatedData = formSchema.parse({ email, password });
-      const res = await signUp(validatedData.email, validatedData.password);
+      const validatedData = formSchema.parse({ username, email, password });
+      const res = await signUp(
+        validatedData.username,
+        validatedData.email,
+        validatedData.password
+      );
     } catch (err) {
       if (err instanceof z.ZodError) {
         err.errors.forEach((error) => {
           if (error.path[0] === "email") setEmailError(error.message);
           if (error.path[0] === "password") setPasswordError(error.message);
+          if (error.path[0] === "username") setUsernameError(error.message);
         });
       } else {
         console.error(err);
@@ -74,6 +83,18 @@ export function Signup() {
         </CardHeader>
         <form onSubmit={onSubmit}>
           <CardContent className="space-y-4">
+            <div className="space-y-2">
+              <Label htmlFor="username">Username</Label>
+              <Input
+                id="username"
+                name="username"
+                type="text"
+                placeholder="username"
+              />
+              {usernameError && (
+                <p className="text-sm text-red-500">{usernameError}</p>
+              )}
+            </div>
             <div className="space-y-2">
               <Label htmlFor="email">Email</Label>
               <Input

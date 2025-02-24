@@ -14,7 +14,7 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { useAuth } from "../providers/supabase-auth-provider";
+import { useAuth } from "../providers/strapi-auth-provider";
 
 const formSchema = z.object({
   email: z.string().email({ message: "Invalid email address" }),

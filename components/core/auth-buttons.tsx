@@ -2,7 +2,7 @@ import { cn } from "@/lib/utils";
 import { buttonVariants } from "../ui/button";
 import Link from "next/link";
 import { authLink, authRegisterLink } from "@/config/links";
-import { useAuth } from "../providers/supabase-auth-provider";
+import { useAuth } from "../providers/strapi-auth-provider";
 
 interface SingleButtonProps {
   width: Number;

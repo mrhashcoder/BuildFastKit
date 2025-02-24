@@ -12,7 +12,7 @@ import {
 import { Icons } from "../ui/icons";
 import { cn } from "@/lib/utils";
 import { buttonVariants } from "@/components/ui/button";
-import { useAuth } from "@/components/providers/supabase-auth-provider";
+import { useAuth } from "@/components/providers/strapi-auth-provider";
 import { LoginButton, LogoutButton, SignUpButton } from "../core/auth-buttons";
 
 export default function NavBar() {
