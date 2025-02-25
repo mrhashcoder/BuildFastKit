@@ -15,6 +15,8 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useAuth } from "../providers/strapi-auth-provider";
+import { authLink } from "@/config/links";
+import Link from "next/link";
 
 const formSchema = z.object({
   username: z
@@ -141,6 +143,15 @@ export function Signup() {
               {isLoading ? "Signing up..." : "Register"}
             </Button>
             {error && <p className="text-sm text-red-500">{error}</p>}
+            <Button
+              variant="link"
+              className="text-sm text-muted-foreground hover:text-primary"
+            >
+              <Link href={authLink.path}>Already have a account?</Link>
+            </Button>
+            <Button variant="outline" className="w-full">
+              <Link href={authLink.path}>Login with existing account</Link>
+            </Button>
           </CardFooter>
         </form>
       </Card>

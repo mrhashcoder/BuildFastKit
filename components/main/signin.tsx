@@ -15,6 +15,8 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useAuth } from "../providers/strapi-auth-provider";
+import { authRegisterLink } from "@/config/links";
+import Link from "next/link";
 
 const formSchema = z.object({
   email: z.string().email({ message: "Invalid email address" }),
@@ -22,6 +24,10 @@ const formSchema = z.object({
     .string()
     .min(6, { message: "Password must be at least 6 characters long" }),
 });
+
+function handleForgetPassword() {
+  console.log("Function Not Impleted Yet");
+}
 
 export function Signin() {
   const [showPassword, setShowPassword] = useState(false);
@@ -123,8 +129,12 @@ export function Signin() {
             <Button
               variant="link"
               className="text-sm text-muted-foreground hover:text-primary"
+              onClick={handleForgetPassword}
             >
               Forgot your password?
+            </Button>
+            <Button variant="outline" className="w-full">
+              <Link href={authRegisterLink.path}>Create an Account</Link>
             </Button>
           </CardFooter>
         </form>

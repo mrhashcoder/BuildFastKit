@@ -1,134 +1,141 @@
 "use client";
+
+import * as React from "react";
 import Link from "next/link";
-import { Sheet, SheetTrigger, SheetContent } from "@/components/ui/sheet";
-import { Button } from "@/components/ui/button";
-import { ModeToggle } from "../core/mode-toggle";
 import {
+  Menu,
+  Home,
+  Info,
+  Briefcase,
+  Mail,
+  LogIn,
+  ArrowRight,
+  LayoutDashboard,
+  LogOut,
+} from "lucide-react";
+
+import { Button } from "@/components/ui/button";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { useAuth } from "../providers/strapi-auth-provider";
+import {
+  afterAuthLink,
   authLink,
   authRegisterLink,
-  DashboardLinks,
   NavbarLinks,
 } from "@/config/links";
-import { Icons } from "../ui/icons";
-import { cn } from "@/lib/utils";
-import { buttonVariants } from "@/components/ui/button";
-import { useAuth } from "@/components/providers/strapi-auth-provider";
-import { LoginButton, LogoutButton, SignUpButton } from "../core/auth-buttons";
 
-export default function NavBar() {
+export default function Navbar() {
+  const [isOpen, setIsOpen] = React.useState(false);
   const { isAuthenticated } = useAuth();
 
-  const NavBarLinkGroupHTML = NavbarLinks.map((link) => {
-    return (
-      <Link
-        href={link.path}
-        className="text-lg font-medium hover:underline underline-offset-4"
-        prefetch={false}
-        key={link.name}
-      >
-        {link.name}
-      </Link>
-    );
-  });
-
-  const DashboardLinkGroupHTML = DashboardLinks.map((link) => {
-    return (
-      <Link
-        href={link.path}
-        className="text-lg font-medium hover:underline underline-offset-4"
-        prefetch={false}
-        key={link.name}
-      >
-        {link.name}
-      </Link>
-    );
-  });
-
   return (
-    <header className="w-full h-full flex items-center justify-between px-4 py-2 bg-background">
-      <div className="flex gap-2 items-center">
-        <Link href="/" className="flex items-center gap-2" prefetch={false}>
-          <Icons.mountainIcon className="h-6 w-6" />
-          <span className="text-xl font-bold">BuildFastKit</span>
-        </Link>
-      </div>
+    <nav className="border-b">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex h-16 items-center justify-between">
+          <Link href="/" className="text-2xl font-bold">
+            Logo
+          </Link>
 
-      {/* Top Navbar Data Links Goes inside this div */}
-      <div className="hidden md:flex items-center gap-4">
-        {NavBarLinkGroupHTML}
-        {isAuthenticated ? (
-          <>
-            <LogoutButton width={5} />
-          </>
-        ) : (
-          <>
-            <SignUpButton width={5} />
-            <LoginButton width={5} />
-          </>
-        )}
-        <ModeToggle />
-      </div>
+          {/* Desktop Menu */}
+          <div className="hidden md:flex space-x-6">
+            {NavbarLinks.map((item) => (
+              <Link
+                key={item.name}
+                href={item.path}
+                className="text-md hover:underline"
+              >
+                {item.name}
+              </Link>
+            ))}
+          </div>
 
-      <div className="md:hidden flex items-center justify-between">
-        <div className="mx-2">
-          <ModeToggle />
+          {/* Authentication Buttons */}
+          <div className="hidden md:flex">
+            {isAuthenticated ? (
+              <>
+                <Button asChild>
+                  <Link href={afterAuthLink.path}>
+                    <LayoutDashboard className="mr-2 h-5 w-5" />
+                    Dashboard
+                  </Link>
+                </Button>
+              </>
+            ) : (
+              <>
+                <Button variant="outline" className="mr-2" asChild>
+                  <Link href={authLink.path}>
+                    <LogIn className="mr-2 h-5 w-5" />
+                    Login
+                  </Link>
+                </Button>
+                <Button asChild>
+                  <Link href={authRegisterLink.path}>
+                    <ArrowRight className="mr-2 h-5 w-5" />
+                    Register
+                  </Link>
+                </Button>
+              </>
+            )}
+          </div>
+
+          {/* Mobile Menu */}
+          <div className="md:hidden">
+            <Sheet open={isOpen} onOpenChange={setIsOpen}>
+              <SheetTrigger asChild>
+                <Button variant="outline" size="icon">
+                  <Menu className="h-6 w-6" />
+                  <span className="sr-only">Toggle menu</span>
+                </Button>
+              </SheetTrigger>
+              <SheetContent side="right" className="w-[300px] sm:w-[400px]">
+                <nav className="flex flex-col gap-4">
+                  {NavbarLinks.map((item) => (
+                    <Link
+                      key={item.name}
+                      href={item.path}
+                      className="flex items-center text-lg font-medium"
+                      onClick={() => setIsOpen(false)}
+                    >
+                      <item.icon className="mr-2 h-5 w-5" />
+                      {item.name}
+                    </Link>
+                  ))}
+
+                  {isAuthenticated ? (
+                    <>
+                      <Button asChild className="w-full justify-start">
+                        <Link href={afterAuthLink.path}>
+                          <LayoutDashboard className="mr-2 h-6 w-6" />
+                          Dashboard
+                        </Link>
+                      </Button>
+                    </>
+                  ) : (
+                    <>
+                      <Button
+                        variant="outline"
+                        className="w-full justify-start"
+                        asChild
+                      >
+                        <Link href={authLink.path}>
+                          <LogIn className="mr-2 h-5 w-5" />
+                          Login
+                        </Link>
+                      </Button>
+                      <Button className="w-full justify-start" asChild>
+                        <Link href={authRegisterLink.path}>
+                          <ArrowRight className="mr-2 h-5 w-5" />
+                          Register
+                        </Link>
+                      </Button>
+                    </>
+                  )}
+                </nav>
+              </SheetContent>
+            </Sheet>
+          </div>
         </div>
-        {/* Side Navbar in mobile links goes insde this div */}
-        <Sheet>
-          <SheetTrigger asChild>
-            <Button
-              variant="outline"
-              size="icon"
-              className=" border-primary border-[1px] lg:hidden"
-            >
-              <Icons.menuIcon className="h-10 w-10" />
-              <span className="sr-only">Toggle navigation menu</span>
-            </Button>
-          </SheetTrigger>
-          <SheetContent
-            side="left"
-            className="rounded-md border-y-1 border-primary"
-          >
-            <div className="flex h-full flex-col justify-between items-start">
-              <div>
-                <div className="flex flex-col divide-y divide-primary items-start w-md py-4">
-                  {NavBarLinkGroupHTML}
-                </div>
-
-                <div className="flex flex-col divide-y divide-primary items-start w-md py-4">
-                  {DashboardLinkGroupHTML}
-                </div>
-              </div>
-
-              {isAuthenticated ? (
-                <div className="w-full flex flex-wrap items-center justify-end ">
-                  <LogoutButton width={12} />
-                </div>
-              ) : (
-                <div className="w-full flex flex-wrap items-center justify-end ">
-                  <Link
-                    href={authLink.path}
-                    className={`w-[5rem] ${cn(buttonVariants({ size: "lg" }))} text-lg font-medium m-2`}
-                    prefetch={false}
-                    key={authLink.name}
-                  >
-                    {authLink.name}
-                  </Link>
-                  <Link
-                    href={authRegisterLink.path}
-                    className={`w-[5rem] ${cn(buttonVariants({ size: "lg" }))} text-lg font-medium m-2`}
-                    prefetch={false}
-                    key={authRegisterLink.name}
-                  >
-                    {authRegisterLink.name}
-                  </Link>
-                </div>
-              )}
-            </div>
-            <div className=""></div>
-          </SheetContent>
-        </Sheet>
       </div>
-    </header>
+    </nav>
   );
 }

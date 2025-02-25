@@ -1,12 +1,10 @@
 import React from "react";
-import Hero from "@/components/main/hero";
-import NavBar from "@/components/main/navbar";
+import TermsAndConditions from "@/components/main/policy";
 
 function Development() {
   return (
     <div className="p-2 m-2">
-      Pricing Page
-      <Hero type={1} />
+      <TermsAndConditions />
     </div>
   );
 }

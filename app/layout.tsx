@@ -7,6 +7,8 @@ import NavBar from "@/components/main/navbar";
 import Footer from "@/components/main/footer";
 import StrapiAuthProvider from "@/components/providers/strapi-auth-provider";
 import { Toaster } from "@/components/ui/toaster";
+import Sidebar from "@/components/main/sidebar";
+import TopNav from "@/components/main/topnavbar";
 
 const ubuntu_mono = Ubuntu_Mono({
   weight: ["400", "700"],
@@ -68,15 +70,12 @@ export default async function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${ubuntu_mono.className} bg-background text-primary`}>
+      <body
+        className={`${ubuntu_mono.className} bg-background text-primary `}
+      >
         <StrapiAuthProvider>
           <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
-            <div>
-              <NavBar />
-              {children}
-              <Footer />
-              <Toaster />
-            </div>
+            {children}
           </ThemeProvider>
         </StrapiAuthProvider>
       </body>

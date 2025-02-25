@@ -9,6 +9,7 @@ import {
 } from "react";
 import { useRouter } from "next/navigation";
 import Cookies from "js-cookie";
+import { afterAuthLink, authLink } from "@/config/links";
 
 interface AuthContextProps {
   user: any;
@@ -71,7 +72,7 @@ export default function StrapiAuthProvider({
       const { user } = await res.json();
       setUser(user);
       router.refresh();
-      router.push("/private");
+      router.push(afterAuthLink.path);
     } else {
       throw new Error("Login failed");
     }
@@ -96,6 +97,7 @@ export default function StrapiAuthProvider({
   const signOut = async () => {
     await fetch("/api/auth/logout", { method: "POST" });
     setUser(null);
+    router.push(authLink.path);
     router.refresh();
   };
 
