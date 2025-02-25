@@ -70,9 +70,7 @@ export default async function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${courier_prime.className} bg-background text-primary `}
-      >
+      <body className={`${ubuntu_mono.className} bg-background text-primary `}>
         <StrapiAuthProvider>
           <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
             {children}
