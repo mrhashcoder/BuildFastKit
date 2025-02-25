@@ -5,7 +5,6 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { useRouter } from "next/navigation";
-import { createQuery } from "@/actions/createquery";
 
 export default function ContactUs() {
   const router = useRouter();
@@ -18,13 +17,7 @@ export default function ContactUs() {
     const name = formData.get("name") as string;
     const email = formData.get("email") as string;
     const phoneno = formData.get("phone-no") as string;
-    const query = formData.get("query") as string;
-    try {
-      await createQuery({ name, email, phoneno, query });
-      router.push("/");
-    } catch (error: any) {
-      console.log(error);
-    }
+    console.log(name, email, phoneno);
   };
 
   return (
