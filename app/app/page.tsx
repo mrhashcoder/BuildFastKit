@@ -1,4 +1,4 @@
-import { SignOut } from "@/components/main/signout";
+import { SignOut } from "@/components/auth/signout";
 import React from "react";
 
 export default function Dashboard() {

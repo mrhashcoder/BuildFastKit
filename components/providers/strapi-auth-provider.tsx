@@ -32,16 +32,15 @@ export default function StrapiAuthProvider({
   const router = useRouter();
   const [user, setUser] = useState<any>(null);
   const [isLoading, setIsLoading] = useState(true);
-
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
   useEffect(() => {
     const fetchUser = async () => {
-      console.log("Fetching user");
       setIsLoading(true);
       const token = Cookies.get("strapi_token"); // Read token from cookies
 
       if (!token) {
         setUser(null);
-        setIsLoading(false);
+        setIsAuthenticated(false);
       }
       if (!user) {
         try {
@@ -49,9 +48,11 @@ export default function StrapiAuthProvider({
           if (res.ok) {
             const { user } = await res.json();
             setUser(user);
+            setIsAuthenticated(true);
           }
         } catch (error) {
           setUser(null);
+          setIsAuthenticated(false);
         } finally {
           setIsLoading(false);
         }
@@ -71,6 +72,8 @@ export default function StrapiAuthProvider({
     if (res.ok) {
       const { user } = await res.json();
       setUser(user);
+      localStorage.setItem("loggedUser", JSON.stringify(user));
+      setIsAuthenticated(true);
       router.refresh();
       router.push(afterAuthLink.path);
     } else {
@@ -88,6 +91,8 @@ export default function StrapiAuthProvider({
     if (res.ok) {
       const { user } = await res.json();
       setUser(user);
+      setIsAuthenticated(true);
+      localStorage.setItem("loggedUser", JSON.stringify(user));
       router.refresh();
     } else {
       throw new Error("Registration failed");
@@ -97,6 +102,9 @@ export default function StrapiAuthProvider({
   const signOut = async () => {
     await fetch("/api/auth/logout", { method: "POST" });
     setUser(null);
+    setIsAuthenticated(false);
+    localStorage.setItem("loggedUser", "null");
+    Cookies.remove("strapi_token");
     router.push(authLink.path);
     router.refresh();
   };
@@ -109,7 +117,7 @@ export default function StrapiAuthProvider({
         signIn,
         signUp,
         signOut,
-        isAuthenticated: !!user,
+        isAuthenticated,
       }}
     >
       {children}

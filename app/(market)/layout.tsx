@@ -2,8 +2,8 @@
 
 import type { ReactNode } from "react";
 import { Toaster } from "@/components/ui/toaster";
-import NavBar from "@/components/main/navbar";
-import Footer from "@/components/main/footer";
+import NavBar from "@/components/core/navbar";
+import Footer from "@/components/core/footer";
 
 interface LayoutProps {
   children: ReactNode;

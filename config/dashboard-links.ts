@@ -14,49 +14,109 @@ import {
   HelpCircle,
 } from "lucide-react";
 
-export interface NavLink {
-  name: string;
-  path: string;
-  icon: any;
-}
-
+import type { NavLink } from "@/types";
 export interface NavCategory {
   category: string;
   links: NavLink[];
 }
 
-export const NAV_LINKS: NavCategory[] = [
+export const DashboardLinks: NavCategory[] = [
   {
     category: "Overview",
     links: [
-      { name: "Dashboard", path: "/", icon: Home },
-      { name: "Analytics", path: "/analytics", icon: BarChart2 },
-      { name: "Organization", path: "/organization", icon: Building2 },
-      { name: "Projects", path: "/projects", icon: Folder },
+      {
+        name: "Dashboard",
+        path: "/app",
+        description: "View key metrics and insights",
+        icon: Home,
+      },
+      {
+        name: "Analytics",
+        path: "/app/analytics",
+        description: "Analyze trends and data",
+        icon: BarChart2,
+      },
+      {
+        name: "Organization",
+        path: "/app/organization",
+        description: "Manage your organization structure",
+        icon: Building2,
+      },
+      {
+        name: "Projects",
+        path: "/app/projects",
+        description: "Track and manage projects",
+        icon: Folder,
+      },
     ],
   },
   {
     category: "Finance",
     links: [
-      { name: "Transactions", path: "/transactions", icon: Wallet },
-      { name: "Invoices", path: "/invoices", icon: Receipt },
-      { name: "Payments", path: "/payments", icon: CreditCard },
+      {
+        name: "Transactions",
+        path: "/app/transactions",
+        description: "View and manage transactions",
+        icon: Wallet,
+      },
+      {
+        name: "Invoices",
+        path: "/app/invoices",
+        description: "Manage and send invoices",
+        icon: Receipt,
+      },
+      {
+        name: "Payments",
+        path: "/app/payments",
+        description: "Handle payment processing",
+        icon: CreditCard,
+      },
     ],
   },
   {
     category: "Team",
     links: [
-      { name: "Members", path: "/members", icon: Users2 },
-      { name: "Permissions", path: "/permissions", icon: Shield },
-      { name: "Chat", path: "/chat", icon: MessagesSquare },
-      { name: "Meetings", path: "/meetings", icon: Video },
+      {
+        name: "Members",
+        path: "/app/members",
+        description: "Manage team members",
+        icon: Users2,
+      },
+      {
+        name: "Permissions",
+        path: "/app/permissions",
+        description: "Set roles and permissions",
+        icon: Shield,
+      },
+      {
+        name: "Chat",
+        path: "/app/chat",
+        description: "Communicate with your team",
+        icon: MessagesSquare,
+      },
+      {
+        name: "Meetings",
+        path: "/app/meetings",
+        description: "Schedule and join meetings",
+        icon: Video,
+      },
     ],
   },
   {
     category: "Settings",
     links: [
-      { name: "Settings", path: "/settings", icon: Settings },
-      { name: "Help", path: "/help", icon: HelpCircle },
+      {
+        name: "Settings",
+        path: "/app/settings",
+        description: "Configure system settings",
+        icon: Settings,
+      },
+      {
+        name: "Help",
+        path: "/login",
+        description: "Get help and support",
+        icon: HelpCircle,
+      },
     ],
   },
 ];

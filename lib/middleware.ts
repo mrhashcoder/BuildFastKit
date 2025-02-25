@@ -1,20 +1,27 @@
+"use client";
 import { authLink, afterAuthLink, privateLinkMap } from "@/config/links";
 import { NextResponse, type NextRequest } from "next/server";
 import axios from "axios";
+import { UserPlus } from "lucide-react";
 
 const STRAPI_API_URL =
   process.env.NEXT_PUBLIC_STRAPI_API_URL || "http://localhost:1337/api";
 
 // Function to get user from Strapi using the stored JWT token
-const getUserFromStrapi = async (token: string | undefined) => {
-  if (!token) return null;
-
+const getUserFromStrapi = async (request: NextRequest) => {
   try {
-    const { data } = await axios.get(`${STRAPI_API_URL}/users/me`, {
-      headers: { Authorization: `Bearer ${token}` },
+    let url = request.nextUrl.origin + "/api/auth/me";
+    const res = await fetch(url, {
+      headers: request.headers,
     });
-    return data;
+    if (res.ok) {
+      const { user } = await res.json();
+      console.log("[getUserFromStrapi] user : ", user);
+      return user;
+    }
+    return null;
   } catch (error) {
+    console.log(error);
     return null;
   }
 };
@@ -23,32 +30,19 @@ export async function updateSession(request: NextRequest) {
   let strapiResponse = NextResponse.next({ request });
 
   const token = request.cookies.get("strapi_token")?.value;
-  const user = await getUserFromStrapi(token);
 
+  console.log("[updateSession] token : ", token);
   const validateUser = (request: NextRequest): boolean => {
     const keys = Object.keys(privateLinkMap);
-    return keys.some(
-      (key: string) => request.nextUrl.pathname === privateLinkMap[key].path
+    return keys.some((key: string) =>
+      request.nextUrl.pathname.startsWith(privateLinkMap[key].path)
     );
   };
 
-  console.log(user);
-
-  if (!user && validateUser(request)) {
+  if (!token && validateUser(request)) {
     // Redirect unauthenticated users to the login page
     const url = request.nextUrl.clone();
     url.pathname = authLink.path;
-    return NextResponse.redirect(url);
-  }
-
-  if (
-    user &&
-    (request.nextUrl.pathname.startsWith("/login") ||
-      request.nextUrl.pathname.startsWith("/signup"))
-  ) {
-    // Redirect authenticated users away from login/signup to the dashboard
-    const url = request.nextUrl.clone();
-    url.pathname = afterAuthLink.path;
     return NextResponse.redirect(url);
   }
 

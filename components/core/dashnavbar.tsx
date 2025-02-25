@@ -7,9 +7,9 @@ import {
 } from "@/components/ui/dropdown-menu";
 import Image from "next/image";
 import { Bell, ChevronRight } from "lucide-react";
-import ProfileNavCard from "./profile-nav-card";
+import ProfileNavCard from "../main/profile-nav-card";
 import Link from "next/link";
-import { ModeToggle } from "../core/mode-toggle";
+import { ModeToggle } from "./mode-toggle";
 
 interface BreadcrumbItem {
   label: string;

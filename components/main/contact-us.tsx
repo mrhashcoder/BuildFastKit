@@ -28,7 +28,7 @@ export default function ContactUs() {
   };
 
   return (
-    <div className="block max-w-4xl w-full mx-auto my-5 p-6 bg-white border-2 rounded-lg shadow-md">
+    <div className="block max-w-4xl w-full mx-auto my-5 p-6 border-2 rounded-lg shadow-md">
       <h2 className="text-2xl font-bold mb-6 text-center">Contact Us</h2>
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
