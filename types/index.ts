@@ -1,3 +1,5 @@
+import type { LucideIcon } from "lucide-react";
+
 export type Settings = {
   themeToggleEnabled: boolean;
 };
@@ -22,4 +24,5 @@ export type NavLink = {
   name: string;
   path: string;
   description: string;
+  icon: LucideIcon;
 };

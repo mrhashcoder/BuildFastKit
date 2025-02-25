@@ -1,68 +1,104 @@
+import {
+  Home,
+  Info,
+  Briefcase,
+  Mail,
+  LogIn,
+  User,
+  FileText,
+  UserCheck,
+  MailIcon,
+  Siren,
+} from "lucide-react";
 import { NavLink } from "@/types";
 
-export const privateLinkMap: any = {
-  dashboard: {
-    name: "dashboard",
-    path: "/dashboard",
-    description: "The Dashboard",
+export const privateLinkMap: Record<string, NavLink> = {
+  application: {
+    name: "App",
+    path: "/app",
+    description: "The Application",
+    icon: Home,
   },
   private: {
-    name: "private",
-    path: "/private",
+    name: "Private",
+    path: "/app/private",
     description: "The Private Route",
+    icon: UserCheck,
   },
   invoice: {
-    name: "invoice",
-    path: "/invoice",
-    description: "the Inoivce",
+    name: "Invoice",
+    path: "/app/invoice",
+    description: "The Invoice",
+    icon: FileText,
   },
   profile: {
-    name: "profile",
-    path: "/profile",
-    description: "the Profile",
+    name: "Profile",
+    path: "/app/profile",
+    description: "The Profile",
+    icon: User,
   },
 };
 
-export const publicLinkMap: any = {
+export const publicLinkMap: Record<string, NavLink> = {
   login: {
     name: "Login",
     path: "/login",
     description: "The Login",
+    icon: LogIn,
   },
   signup: {
     name: "Register",
     path: "/signup",
     description: "The Signup",
+    icon: User,
   },
   home: {
     name: "Home",
     path: "/",
     description: "The Home",
+    icon: Home,
   },
   about: {
     name: "About",
     path: "/about",
     description: "The About",
+    icon: Info,
   },
   pricing: {
     name: "Pricing",
     path: "/pricing",
     description: "The Pricing Page",
+    icon: Briefcase,
+  },
+  contactus: {
+    name: "ContactUs",
+    path: "/contact",
+    description: "Contact Form Page",
+    icon: MailIcon,
+  },
+  policy: {
+    name: "Policy",
+    path: "/policy",
+    description: "The Policy Page",
+    icon: Siren,
   },
 };
-
-export const DashboardLinks: NavLink[] = [
-  privateLinkMap.dashboard,
-  privateLinkMap.private,
-];
 
 export const NavbarLinks: NavLink[] = [
   publicLinkMap.home,
   publicLinkMap.about,
   publicLinkMap.pricing,
+  publicLinkMap.contactus,
 ];
 
-export const afterAuthLink: NavLink = privateLinkMap.dashboard;
+export const FooterLinks: NavLink[] = [
+  publicLinkMap.about,
+  publicLinkMap.pricing,
+  publicLinkMap.contactus,
+  publicLinkMap.policy,
+];
+
+export const afterAuthLink: NavLink = privateLinkMap.application;
 
 export const authLink: NavLink = publicLinkMap.login;
 

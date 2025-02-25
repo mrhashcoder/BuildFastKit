@@ -1,83 +1,50 @@
-import { afterAuthLink, authLink, privateLinkMap } from "@/config/links";
-import { createServerClient } from "@supabase/ssr";
+"use client";
+import { authLink, afterAuthLink, privateLinkMap } from "@/config/links";
 import { NextResponse, type NextRequest } from "next/server";
+import axios from "axios";
+import { UserPlus } from "lucide-react";
+
+const STRAPI_API_URL =
+  process.env.NEXT_PUBLIC_STRAPI_API_URL || "http://localhost:1337/api";
+
+// Function to get user from Strapi using the stored JWT token
+const getUserFromStrapi = async (request: NextRequest) => {
+  try {
+    let url = request.nextUrl.origin + "/api/auth/me";
+    const res = await fetch(url, {
+      headers: request.headers,
+    });
+    if (res.ok) {
+      const { user } = await res.json();
+      console.log("[getUserFromStrapi] user : ", user);
+      return user;
+    }
+    return null;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+};
 
 export async function updateSession(request: NextRequest) {
-  let supabaseResponse = NextResponse.next({
-    request: {
-      headers: request.headers,
-    },
-  });
+  let strapiResponse = NextResponse.next({ request });
 
-  const supabase = createServerClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
-    {
-      cookies: {
-        getAll() {
-          return request.cookies.getAll();
-        },
-        setAll(cookiesToSet) {
-          cookiesToSet.forEach(({ name, value, options }) =>
-            request.cookies.set(name, value)
-          );
-          supabaseResponse = NextResponse.next({
-            request,
-          });
-          cookiesToSet.forEach(({ name, value, options }) =>
-            supabaseResponse.cookies.set(name, value, options)
-          );
-        },
-      },
-    }
-  );
+  const token = request.cookies.get("strapi_token")?.value;
 
-  // IMPORTANT: Avoid writing any logic between createServerClient and
-  // supabase.auth.getUser(). A simple mistake could make it very hard to debug
-  // issues with users being randomly logged out.
-
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-
-  console.log(user);
-
+  console.log("[updateSession] token : ", token);
   const validateUser = (request: NextRequest): boolean => {
     const keys = Object.keys(privateLinkMap);
-    return keys.some(
-      (key: string) => request.nextUrl.pathname === privateLinkMap[key].path
+    return keys.some((key: string) =>
+      request.nextUrl.pathname.startsWith(privateLinkMap[key].path)
     );
   };
 
-  if (!user && validateUser(request)) {
-    // no user, potentially respond by redirecting the user to the login page
+  if (!token && validateUser(request)) {
+    // Redirect unauthenticated users to the login page
     const url = request.nextUrl.clone();
     url.pathname = authLink.path;
     return NextResponse.redirect(url);
   }
 
-  if (
-    user &&
-    (request.nextUrl.pathname.startsWith("/login") ||
-      request.nextUrl.pathname.startsWith("/signup"))
-  ) {
-    const url = request.nextUrl.clone();
-    url.pathname = afterAuthLink.path;
-    return NextResponse.redirect(url);
-  }
-
-  // IMPORTANT: You *must* return the supabaseResponse object as it is. If you're
-  // creating a new response object with NextResponse.next() make sure to:
-  // 1. Pass the request in it, like so:
-  //    const myNewResponse = NextResponse.next({ request })
-  // 2. Copy over the cookies, like so:
-  //    myNewResponse.cookies.setAll(supabaseResponse.cookies.getAll())
-  // 3. Change the myNewResponse object to fit your needs, but avoid changing
-  //    the cookies!
-  // 4. Finally:
-  //    return myNewResponse
-  // If this is not done, you may be causing the browser and server to go out
-  // of sync and terminate the user's session prematurely!
-
-  return supabaseResponse;
+  return strapiResponse;
 }

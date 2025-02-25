@@ -3,12 +3,12 @@ import { siteConfig } from "@/config/site";
 import { Ubuntu_Mono, Courier_Prime } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/providers/theme-provider";
-import NavBar from "@/components/main/navbar";
-import Footer from "@/components/main/footer";
-import SupabaseProvider from "@/components/providers/supabase-provider";
-import createClient from "@/components/providers/supabase-server";
-import SupabaseAuthProvider from "@/components/providers/supabase-auth-provider";
+import NavBar from "@/components/core/navbar";
+import Footer from "@/components/core/footer";
+import StrapiAuthProvider from "@/components/providers/strapi-auth-provider";
 import { Toaster } from "@/components/ui/toaster";
+import Sidebar from "@/components/core/sidebar";
+import TopNav from "@/components/core/dashnavbar";
 
 const ubuntu_mono = Ubuntu_Mono({
   weight: ["400", "700"],
@@ -68,23 +68,16 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const supabase = createClient();
-  const {
-    data: { session },
-  } = await supabase.auth.getSession();
   return (
     <html lang="en">
-      <body className={`${ubuntu_mono.className}  bg-background text-primary`}>
-        <SupabaseProvider>
-          <SupabaseAuthProvider serverSession={session}>
-            <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
-              <NavBar />
-              {children}
-              <Footer />
-              <Toaster />
-            </ThemeProvider>
-          </SupabaseAuthProvider>
-        </SupabaseProvider>
+      <body
+        className={`${courier_prime.className} bg-background text-primary `}
+      >
+        <StrapiAuthProvider>
+          <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
+            {children}
+          </ThemeProvider>
+        </StrapiAuthProvider>
       </body>
     </html>
   );
