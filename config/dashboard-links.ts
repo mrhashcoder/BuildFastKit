@@ -77,9 +77,9 @@ export const DashboardLinks: NavCategory[] = [
     category: "Team",
     links: [
       {
-        name: "Members",
-        path: "/app/members",
-        description: "Manage team members",
+        name: "Users",
+        path: "/app/users",
+        description: "Manage Your Users",
         icon: Users2,
       },
       {

@@ -9,7 +9,6 @@ import StrapiAuthProvider from "@/components/providers/strapi-auth-provider";
 import { Toaster } from "@/components/ui/toaster";
 import Sidebar from "@/components/core/sidebar";
 import TopNav from "@/components/core/dashnavbar";
-
 const ubuntu_mono = Ubuntu_Mono({
   weight: ["400", "700"],
   subsets: ["latin"],
