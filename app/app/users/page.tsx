@@ -1,5 +1,6 @@
 "use client";
 import TableListManager from "@/components/feature/table-list-manager";
+import { Heading } from "@/components/main/heading";
 import { UserTable } from "@/components/main/users-table";
 import { usersStore, wallpapersStore } from "@/store/store-instance";
 import { User } from "@/types/collections";
@@ -9,18 +10,8 @@ import { useRecoilValue } from "recoil";
 export default function UsersPage() {
   const fetchUsers = usersStore.useFetchEntities();
   const fetchWallpaper = wallpapersStore.useFetchEntities();
-  const [userIdList, setUserIdList] = useState<string[]>([]);
-
+  const userIds = usersStore.useEntityIds();
   useEffect(() => {
-    fetchUsers()
-      .then((ids) => {
-        console.log(ids);
-        setUserIdList(ids);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-
     fetchWallpaper()
       .then((ids) => {
         console.log(ids);
@@ -31,7 +22,11 @@ export default function UsersPage() {
   }, []);
   return (
     <>
-      <TableListManager userIds={userIdList} />
+      <Heading
+        title="Users"
+        subtitle="Manage your users and their roles here."
+      />
+      <TableListManager userIds={userIds} />
     </>
   );
 }

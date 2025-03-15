@@ -4,10 +4,11 @@ import { useRecoilValue, selectorFamily } from "recoil";
 import { UserTable } from "../main/users-table";
 
 interface TableListManagerProps {
-  userIds: string[];
+  userIds: (string | number)[];
 }
 
 function TableListManager({ userIds }: TableListManagerProps) {
+  // TODO: Implement Pagination Logic HERE
   const users = useRecoilValue(usersStore.aggregatedEntitiesSelector(userIds));
 
   return <UserTable users={users} />;

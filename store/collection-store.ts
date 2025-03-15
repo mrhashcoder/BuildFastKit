@@ -1,12 +1,14 @@
 // collectionStore.ts
 
 import {
+  atom,
   atomFamily,
   useRecoilState,
   useRecoilCallback,
   selectorFamily,
 } from "recoil";
 import axiosInstance from "@/lib/axios";
+import { useEffect } from "react";
 
 // Enum for tracking fetch states
 export enum FetchState {
@@ -50,6 +52,11 @@ export function createCollectionStore<T>(
       data: null,
       status: FetchState.IDLE,
     }),
+  });
+
+  const entityIdsAtom = atom<(string | number)[]>({
+    key: `${collectionName}EntityIds`,
+    default: [],
   });
 
   const aggregatedEntitiesSelector = selectorFamily<T[], (string | number)[]>({
@@ -120,19 +127,37 @@ export function createCollectionStore<T>(
   };
 
   // Create a new entity in the collection on Strapi.
-  const addEntity = async (newEntityData: T): Promise<T> => {
-    try {
-      const response = await axiosInstance.post(
-        `${BASE_URL}/${apiEndpoint}`,
-        newEntityData
-      );
-      // Note: To update the atom for the new entity, you can call fetchEntity or manually update via the atom family in a component.
-      return response.data;
-    } catch (error) {
-      throw error;
-    }
+  const useAddEntity = () => {
+    return useRecoilCallback(
+      ({ set }) =>
+        async (newEntityData: T): Promise<T> => {
+          try {
+            const response = await axiosInstance.post(
+              `${BASE_URL}/${apiEndpoint}`,
+              newEntityData
+            );
+  
+            const newEntity = response.data.data; // Ensure correct API response structure
+            const newEntityId = (newEntity as any).id;
+  
+            set(entityAtomFamily(newEntityId), {
+              data: newEntity,
+              status: FetchState.SUCCESS,
+            });
+  
+            set(entityIdsAtom, (prevIds) => [...prevIds, newEntityId]);
+  
+            return newEntity;
+          } catch (error) {
+            console.error("Error adding entity:", error);
+            throw error;
+          }
+        },
+      [entityIdsAtom]
+    );
   };
-
+  
+  
   /**
    * Hook for performing a global fetch of all entities.
    * This hook returns a callback that, when called, fetches all entities from the API,
@@ -158,6 +183,8 @@ export function createCollectionStore<T>(
                 status: FetchState.SUCCESS,
               });
             });
+
+            set(entityIdsAtom, ids);
             return ids;
           } catch (error) {
             throw error;
@@ -187,7 +214,8 @@ export function createCollectionStore<T>(
                 params: { page, limit },
               }
             );
-            const entities: T[] = response.data;
+            const entities: T[] = responeToData(response);
+
             const ids = entities.map((entity) => (entity as any).id);
             entities.forEach((entity) => {
               const id = (entity as any).id;
@@ -205,13 +233,31 @@ export function createCollectionStore<T>(
     );
   };
 
+  const useEntityIds = () => {
+    const [ids, setIds] = useRecoilState(entityIdsAtom);
+    const fetchEntities = useFetchEntities();
+
+    useEffect(() => {
+      if (ids.length === 0) {
+        fetchEntities().then((fetchedIds) => {
+          if (fetchedIds.length > 0) {
+            setIds(fetchedIds);
+          }
+        });
+      }
+    }, [ids, setIds]);
+
+    return ids;
+  };
+
   return {
     entityAtomFamily,
     useEntityStore,
-    addEntity,
+    useAddEntity,
     useFetchEntities,
     useFetchNextEntities,
     aggregatedEntitiesSelector,
+    useEntityIds,
   };
 }
 
@@ -264,3 +310,11 @@ export function createCollectionStore<T>(
 //
 // Similarly, use useFetchNextEntities for pagination.
 // --------------------------------------------------
+
+// const addEntity = usersStore.useAddEntity(); // Hook must be called inside a React component
+
+// const handleAddEntity = async () => {
+//   const newUser = { name: "John Doe", email: "john@example.com" };
+//   await addEntity(newUser);
+// };
+
