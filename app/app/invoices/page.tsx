@@ -1,3 +1,7 @@
-export default async function PrivatePage() {
-  return <p>Hello Mrhashcoder Invoice Page</p>;
+import React from "react";
+
+function page() {
+  return <div>page</div>;
 }
+
+export default page;

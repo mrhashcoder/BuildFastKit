@@ -1,5 +1,5 @@
 "use client";
-import TableListManager from "@/components/feature/table-list-manager";
+import UserListManager from "@/components/feature/user-list-manager";
 import { Heading } from "@/components/main/heading";
 import { UserTable } from "@/components/main/users-table";
 import { usersStore, wallpapersStore } from "@/store/store-instance";
@@ -22,11 +22,7 @@ export default function UsersPage() {
   }, []);
   return (
     <>
-      <Heading
-        title="Users"
-        subtitle="Manage your users and their roles here."
-      />
-      <TableListManager userIds={userIds} />
+      <UserListManager userIds={userIds} />
     </>
   );
 }
