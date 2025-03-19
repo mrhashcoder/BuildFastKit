@@ -14,6 +14,9 @@ import {
   HelpCircle,
 } from "lucide-react";
 
+
+import { User,  Palette, NotebookIcon, Monitor } from "lucide-react";
+
 import type { NavLink } from "@/types";
 export interface NavCategory {
   category: string;
@@ -77,9 +80,9 @@ export const DashboardLinks: NavCategory[] = [
     category: "Team",
     links: [
       {
-        name: "Members",
-        path: "/app/members",
-        description: "Manage team members",
+        name: "Users",
+        path: "/app/users",
+        description: "Manage Your Users",
         icon: Users2,
       },
       {
@@ -120,3 +123,34 @@ export const DashboardLinks: NavCategory[] = [
     ],
   },
 ];
+
+export const SettingLinks: NavLink[] = [  {
+  name: "Profile",
+  icon: User,
+  path: "/app/settings",
+  description: ""
+},
+{
+  name: "Account",
+  icon: Settings,
+  path: "/app/settings/account",
+  description: ""
+},
+{
+  name: "Appearance",
+  icon: Palette,
+  path: "/app/settings/appearance",
+  description: ""
+},
+{
+  name: "Notifications",
+  icon: NotebookIcon,
+  path: "/app/settings/notifications",
+  description: ""
+},
+{
+  name: "Display",
+  icon: Monitor,
+  path: "/app/settings/display",
+  description: ""
+},];

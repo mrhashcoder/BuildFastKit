@@ -1,3 +1,5 @@
-export default async function SettingsPage() {
-  return <p>Hello Mrhashcoder</p>;
+import { redirect } from "next/navigation";
+
+export default function SettingsPage() {
+  redirect("/app/settings/account");
 }
