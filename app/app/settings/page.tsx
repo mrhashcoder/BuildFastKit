@@ -1,10 +1,5 @@
-import ProfileSettingForm from "@/components/main/forms/profile-settings-form";
-import { Heading } from "@/components/main/heading";
+import { redirect } from "next/navigation";
 
-export default async function SettingsPage() {
-  return (
-    <>
-      <ProfileSettingForm />
-    </>
-  );
+export default function SettingsPage() {
+  redirect("/app/settings/account");
 }
