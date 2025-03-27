@@ -68,8 +68,10 @@ export default async function RootLayout({
       <body className={`${ubuntu_mono.className} bg-background text-primary `}>
         <StrapiAuthProvider>
           <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
-            {children}
-            <Toaster />
+            <>
+              {children}
+              <Toaster />
+            </>
           </ThemeProvider>
         </StrapiAuthProvider>
       </body>

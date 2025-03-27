@@ -36,21 +36,23 @@ export default function SideBarMenu({
     <>
       <div className="p-1 lg:hidden">
         <Select value={val} onValueChange={handleSelect}>
-          <SelectTrigger className="h-12">
-            <SelectValue placeholder="Theme" />
-          </SelectTrigger>
-          <SelectContent>
-            {items.map((item) => (
-              <SelectItem key={item.path} value={item.path}>
-                <div className="flex gap-x-4 px-2 py-1">
-                  <span className="scale-125">
-                    <item.icon size={18} />
-                  </span>
-                  <span className="text-md">{item.name}</span>
-                </div>
-              </SelectItem>
-            ))}
-          </SelectContent>
+          <>
+            <SelectTrigger className="h-12">
+              <SelectValue placeholder="Theme" />
+            </SelectTrigger>
+            <SelectContent>
+              {items.map((item) => (
+                <SelectItem key={item.path} value={item.path}>
+                  <div className="flex gap-x-4 px-2 py-1">
+                    <span className="scale-125">
+                      <item.icon size={18} />
+                    </span>
+                    <span className="text-md">{item.name}</span>
+                  </div>
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </>
         </Select>
       </div>
 
@@ -77,10 +79,12 @@ export default function SideBarMenu({
                 "justify-start"
               )}
             >
-              <span className="mr-2">
-                <item.icon size={18} />
-              </span>
-              {item.name}
+              <>
+                <span className="mr-2">
+                  <item.icon size={18} />
+                </span>
+                {item.name}
+              </>
             </Link>
           ))}
         </nav>

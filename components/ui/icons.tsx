@@ -87,9 +87,11 @@ const icons = {
         strokeLinecap="round"
         strokeLinejoin="round"
       >
-        <line x1="4" x2="20" y1="12" y2="12" />
-        <line x1="4" x2="20" y1="6" y2="6" />
-        <line x1="4" x2="20" y1="18" y2="18" />
+        <>
+          <line x1="4" x2="20" y1="12" y2="12" />
+          <line x1="4" x2="20" y1="6" y2="6" />
+          <line x1="4" x2="20" y1="18" y2="18" />
+        </>
       </svg>
     );
   },
@@ -106,7 +108,9 @@ const icons = {
         strokeLinecap="round"
         strokeLinejoin="round"
       >
-        <path d="m8 3 4 8 5-5 5 15H2L8 3z" />
+        <>
+          <path d="m8 3 4 8 5-5 5 15H2L8 3z" />
+        </>
       </svg>
     );
   },

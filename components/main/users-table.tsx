@@ -109,9 +109,9 @@ export function UserTable({ users }: UserTableProps) {
     setSelectedDate(undefined);
   };
 
-  const uniqueProviders = Array.from(
-    new Set(users.map((user) => user.provider))
-  );
+  const uniqueProviders = users
+    .map((user) => user.provider)
+    .filter((value, index, self) => self.indexOf(value) === index);
 
   return (
     <Card className="w-full">
@@ -128,76 +128,88 @@ export function UserTable({ users }: UserTableProps) {
           </div>
           <div className="flex flex-wrap gap-2">
             <Select value={providerFilter} onValueChange={setProviderFilter}>
-              <SelectTrigger className="w-[130px]">
-                <SelectValue placeholder="Provider" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="all">All Providers</SelectItem>
-                {uniqueProviders.map((provider) => (
-                  <SelectItem key={provider} value={provider}>
-                    {provider}
-                  </SelectItem>
-                ))}
-              </SelectContent>
+              <>
+                <SelectTrigger className="w-[130px]">
+                  <SelectValue placeholder="Provider" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="all">All Providers</SelectItem>
+                  {uniqueProviders.map((provider) => (
+                    <SelectItem key={provider} value={provider}>
+                      {provider}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </>
             </Select>
 
             <Select value={confirmedFilter} onValueChange={setConfirmedFilter}>
-              <SelectTrigger className="w-[130px]">
-                <SelectValue placeholder="Confirmed" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="all">All Status</SelectItem>
-                <SelectItem value="confirmed">Confirmed</SelectItem>
-                <SelectItem value="unconfirmed">Unconfirmed</SelectItem>
-              </SelectContent>
+              <>
+                <SelectTrigger className="w-[130px]">
+                  <SelectValue placeholder="Confirmed" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="all">All Status</SelectItem>
+                  <SelectItem value="confirmed">Confirmed</SelectItem>
+                  <SelectItem value="unconfirmed">Unconfirmed</SelectItem>
+                </SelectContent>
+              </>
             </Select>
 
             <Select value={blockedFilter} onValueChange={setBlockedFilter}>
-              <SelectTrigger className="w-[130px]">
-                <SelectValue placeholder="Blocked" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="all">All Status</SelectItem>
-                <SelectItem value="blocked">Blocked</SelectItem>
-                <SelectItem value="unblocked">Unblocked</SelectItem>
-              </SelectContent>
+              <>
+                <SelectTrigger className="w-[130px]">
+                  <SelectValue placeholder="Blocked" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="all">All Status</SelectItem>
+                  <SelectItem value="blocked">Blocked</SelectItem>
+                  <SelectItem value="unblocked">Unblocked</SelectItem>
+                </SelectContent>
+              </>
             </Select>
 
             <Popover>
-              <PopoverTrigger asChild>
-                <Button
-                  variant="outline"
-                  className="w-[130px] justify-start text-left font-normal"
-                >
-                  <Filter className="mr-2 h-4 w-4" />
-                  <span>
-                    {dateFilter === "all"
-                      ? "Date"
-                      : `${dateFilter.charAt(0).toUpperCase() + dateFilter.slice(1)} Date`}
-                  </span>
-                </Button>
-              </PopoverTrigger>
-              <PopoverContent className="w-auto p-0" align="start">
-                <div className="p-2 border-b">
-                  <Select value={dateFilter} onValueChange={setDateFilter}>
-                    <SelectTrigger className="w-[180px]">
-                      <SelectValue placeholder="Select date type" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="all">All Dates</SelectItem>
-                      <SelectItem value="created">Created At</SelectItem>
-                      <SelectItem value="updated">Updated At</SelectItem>
-                      <SelectItem value="published">Published At</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
-                <Calendar
-                  mode="single"
-                  selected={selectedDate}
-                  onSelect={setSelectedDate}
-                  initialFocus
-                />
-              </PopoverContent>
+              <>
+                <PopoverTrigger asChild>
+                  <Button
+                    variant="outline"
+                    className="w-[130px] justify-start text-left font-normal"
+                  >
+                    <Filter className="mr-2 h-4 w-4" />
+                    <span>
+                      {dateFilter === "all"
+                        ? "Date"
+                        : `${dateFilter.charAt(0).toUpperCase() + dateFilter.slice(1)} Date`}
+                    </span>
+                  </Button>
+                </PopoverTrigger>
+                <PopoverContent className="w-auto p-0" align="start">
+                  <div className="p-2 border-b">
+                    <Select value={dateFilter} onValueChange={setDateFilter}>
+                      <>
+                        <SelectTrigger className="w-[180px]">
+                          <SelectValue placeholder="Select date type" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="all">All Dates</SelectItem>
+                          <SelectItem value="created">Created At</SelectItem>
+                          <SelectItem value="updated">Updated At</SelectItem>
+                          <SelectItem value="published">
+                            Published At
+                          </SelectItem>
+                        </SelectContent>
+                      </>
+                    </Select>
+                  </div>
+                  <Calendar
+                    mode="single"
+                    selected={selectedDate}
+                    onSelect={setSelectedDate}
+                    initialFocus
+                  />
+                </PopoverContent>
+              </>
             </Popover>
 
             <Button variant="ghost" onClick={resetFilters} size="sm">

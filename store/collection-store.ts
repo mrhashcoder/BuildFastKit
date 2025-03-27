@@ -24,7 +24,8 @@ export interface EntityState<T> {
 }
 
 // Base URL for your Strapi REST API (adjust accordingly)
-const BASE_URL = "http://localhost:1337/api";
+const BASE_URL =
+  process.env.NEXT_PUBLIC_BASE_SERVER_URL || "http://localhost:1337/api";
 
 /**
  * Creates a store for a given collection.

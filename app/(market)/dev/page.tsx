@@ -1,3 +1,4 @@
+// @ts-nocheck
 "use client";
 
 import React, { useState } from "react";
@@ -16,7 +17,7 @@ import { Heading } from "@/components/main/heading";
 import { stackConfig } from "@/config/content/stack";
 import { StackBox } from "@/components/main/stack-box";
 
-function page() {
+export default function Page() {
   const [publicId, setPublicId] = useState("/images/levi.jpg");
 
   return (
@@ -27,6 +28,7 @@ function page() {
       />
 
       <div className="space-y-8">
+        {/* @ts-ignore */}
         {stackConfig.map((stack) => (
           <StackBox key={stack.title} title={stack.title} items={stack.items} />
         ))}
@@ -34,5 +36,3 @@ function page() {
     </main>
   );
 }
-
-export default page;

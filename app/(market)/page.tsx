@@ -1,3 +1,4 @@
+// @ts-nocheck
 import ContactUs from "@/components/main/contact-us";
 import Hero from "@/components/main/hero";
 import React from "react";

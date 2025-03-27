@@ -59,28 +59,30 @@ export default function TopNav() {
         <ModeToggle />
 
         <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button
-              variant="outline" 
-              size="icon"
-              className="border-primary border-[1px] rounded-full hover:bg-gray-100 dark:hover:bg-[#1F1F23] transition-colors"
+          <>
+            <DropdownMenuTrigger asChild>
+              <Button
+                variant="outline"
+                size="icon"
+                className="border-primary border-[1px] rounded-full hover:bg-gray-100 dark:hover:bg-[#1F1F23] transition-colors"
+              >
+                <Image
+                  src="/images/avatar.png"
+                  alt="User avatar"
+                  width={32}
+                  height={32}
+                  className="rounded-full"
+                />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent
+              align="end"
+              sideOffset={8}
+              className="w-[280px] sm:w-80 bg-background border-border rounded-lg shadow-lg"
             >
-              <Image
-                src="/images/avatar.png"
-                alt="User avatar"
-                width={32}
-                height={32}
-                className="rounded-full"
-              />
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent
-            align="end"
-            sideOffset={8}
-            className="w-[280px] sm:w-80 bg-background border-border rounded-lg shadow-lg"
-          >
-            <ProfileNavCard avatar="" />
-          </DropdownMenuContent>
+              <ProfileNavCard avatar="" />
+            </DropdownMenuContent>
+          </>
         </DropdownMenu>
       </div>
     </nav>

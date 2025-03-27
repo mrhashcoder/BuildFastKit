@@ -45,59 +45,61 @@ export default function EntryDataTableFacetedFilter<TData, TValue>({
     } else {
       selectedValues.add(value);
     }
-    const filterArray = Array.from(selectedValues);
+    const filterArray = [...(selectedValues as unknown as string[])];
     column?.setFilterValue(filterArray.length ? filterArray : undefined);
   }
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
-      <PopoverTrigger asChild>
-        <Button variant="outline" size="sm" className="h-8">
-          {title}
-          {selectedValues.size > 0 && (
-            <span className="ml-2 h-5 w-5 rounded bg-primary text-primary-foreground text-xs flex items-center justify-center">
-              {selectedValues.size}
-            </span>
-          )}
-          <ChevronDown className="ml-2 h-4 w-4" />
-        </Button>
-      </PopoverTrigger>
-      <PopoverContent className="w-[200px] p-0">
-        <Command>
-          <CommandList>
-            <CommandGroup>
-              {options.map((option) => {
-                const isSelected = selectedValues.has(option);
-                return (
-                  <CommandItem
-                    key={option}
-                    onSelect={() => toggleValue(option)}
-                    className="cursor-pointer"
-                  >
-                    <Check
-                      className={`mr-2 h-4 w-4 ${isSelected ? "opacity-100" : "opacity-0"}`}
-                    />
-                    {option}
-                  </CommandItem>
-                );
-              })}
-            </CommandGroup>
-            <CommandSeparator />
-            <CommandGroup>
-              <CommandItem
-                onSelect={() => {
-                  column.setFilterValue(undefined);
-                  setOpen(false);
-                }}
-                className="cursor-pointer"
-              >
-                Clear filter
-              </CommandItem>
-            </CommandGroup>
-          </CommandList>
-          <CommandEmpty>No results found</CommandEmpty>
-        </Command>
-      </PopoverContent>
+      <>
+        <PopoverTrigger asChild>
+          <Button variant="outline" size="sm" className="h-8">
+            {title}
+            {selectedValues.size > 0 && (
+              <span className="ml-2 h-5 w-5 rounded bg-primary text-primary-foreground text-xs flex items-center justify-center">
+                {selectedValues.size}
+              </span>
+            )}
+            <ChevronDown className="ml-2 h-4 w-4" />
+          </Button>
+        </PopoverTrigger>
+        <PopoverContent className="w-[200px] p-0">
+          <Command>
+            <CommandList>
+              <CommandGroup>
+                {options.map((option) => {
+                  const isSelected = selectedValues.has(option);
+                  return (
+                    <CommandItem
+                      key={option}
+                      onSelect={() => toggleValue(option)}
+                      className="cursor-pointer"
+                    >
+                      <Check
+                        className={`mr-2 h-4 w-4 ${isSelected ? "opacity-100" : "opacity-0"}`}
+                      />
+                      {option}
+                    </CommandItem>
+                  );
+                })}
+              </CommandGroup>
+              <CommandSeparator />
+              <CommandGroup>
+                <CommandItem
+                  onSelect={() => {
+                    column.setFilterValue(undefined);
+                    setOpen(false);
+                  }}
+                  className="cursor-pointer"
+                >
+                  Clear filter
+                </CommandItem>
+              </CommandGroup>
+            </CommandList>
+            <CommandEmpty>No results found</CommandEmpty>
+          </Command>
+        </PopoverContent>
+      </>
     </Popover>
   );
 }

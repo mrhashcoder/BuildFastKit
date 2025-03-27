@@ -86,16 +86,18 @@ export default function DisplayPage() {
                   onValueChange={field.onChange}
                   defaultValue={field.value}
                 >
-                  <FormControl>
-                    <SelectTrigger>
-                      <SelectValue placeholder="Select a layout" />
-                    </SelectTrigger>
-                  </FormControl>
-                  <SelectContent>
-                    <SelectItem value="default">Default</SelectItem>
-                    <SelectItem value="compact">Compact</SelectItem>
-                    <SelectItem value="wide">Wide</SelectItem>
-                  </SelectContent>
+                  <>
+                    <FormControl>
+                      <SelectTrigger>
+                        <SelectValue placeholder="Select a layout" />
+                      </SelectTrigger>
+                    </FormControl>
+                    <SelectContent>
+                      <SelectItem value="default">Default</SelectItem>
+                      <SelectItem value="compact">Compact</SelectItem>
+                      <SelectItem value="wide">Wide</SelectItem>
+                    </SelectContent>
+                  </>
                 </Select>
                 <FormDescription>
                   Choose your preferred layout style.
@@ -114,16 +116,18 @@ export default function DisplayPage() {
                   onValueChange={field.onChange}
                   defaultValue={field.value}
                 >
-                  <FormControl>
-                    <SelectTrigger>
-                      <SelectValue placeholder="Select a sidebar style" />
-                    </SelectTrigger>
-                  </FormControl>
-                  <SelectContent>
-                    <SelectItem value="collapsible">Collapsible</SelectItem>
-                    <SelectItem value="fixed">Fixed</SelectItem>
-                    <SelectItem value="hidden">Hidden</SelectItem>
-                  </SelectContent>
+                  <>
+                    <FormControl>
+                      <SelectTrigger>
+                        <SelectValue placeholder="Select a sidebar style" />
+                      </SelectTrigger>
+                    </FormControl>
+                    <SelectContent>
+                      <SelectItem value="collapsible">Collapsible</SelectItem>
+                      <SelectItem value="fixed">Fixed</SelectItem>
+                      <SelectItem value="hidden">Hidden</SelectItem>
+                    </SelectContent>
+                  </>
                 </Select>
                 <FormDescription>
                   Choose how you want the sidebar to behave.
@@ -142,16 +146,18 @@ export default function DisplayPage() {
                   onValueChange={field.onChange}
                   defaultValue={field.value}
                 >
-                  <FormControl>
-                    <SelectTrigger>
-                      <SelectValue placeholder="Select a content width" />
-                    </SelectTrigger>
-                  </FormControl>
-                  <SelectContent>
-                    <SelectItem value="narrow">Narrow</SelectItem>
-                    <SelectItem value="medium">Medium</SelectItem>
-                    <SelectItem value="wide">Wide</SelectItem>
-                  </SelectContent>
+                  <>
+                    <FormControl>
+                      <SelectTrigger>
+                        <SelectValue placeholder="Select a content width" />
+                      </SelectTrigger>
+                    </FormControl>
+                    <SelectContent>
+                      <SelectItem value="narrow">Narrow</SelectItem>
+                      <SelectItem value="medium">Medium</SelectItem>
+                      <SelectItem value="wide">Wide</SelectItem>
+                    </SelectContent>
+                  </>
                 </Select>
                 <FormDescription>
                   Choose the width of the main content area.

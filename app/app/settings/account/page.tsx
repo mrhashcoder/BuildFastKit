@@ -163,41 +163,46 @@ export default function AccountPage() {
                 <FormLabel>URLs</FormLabel>
                 <FormControl>
                   <div className="space-y-4">
-                    {field.value?.map((url, index) => (
-                      <div key={index} className="flex gap-2">
-                        <Input
-                          placeholder="Enter URL"
-                          {...field}
-                          value={url.value}
-                          onChange={(e) => {
-                            const newUrls = [...(field.value || [])];
-                            newUrls[index] = { value: e.target.value };
-                            field.onChange(newUrls);
-                          }}
-                        />
-                        <Button
-                          type="button"
-                          variant="destructive"
-                          onClick={() => {
-                            const newUrls = field.value?.filter(
-                              (_, i) => i !== index
-                            );
-                            field.onChange(newUrls);
-                          }}
-                        >
-                          Remove
-                        </Button>
-                      </div>
-                    ))}
-                    <Button
-                      type="button"
-                      variant="outline"
-                      onClick={() => {
-                        field.onChange([...(field.value || []), { value: "" }]);
-                      }}
-                    >
-                      Add URL
-                    </Button>
+                    <>
+                      {field.value?.map((url, index) => (
+                        <div key={index} className="flex gap-2">
+                          <Input
+                            placeholder="Enter URL"
+                            {...field}
+                            value={url.value}
+                            onChange={(e) => {
+                              const newUrls = [...(field.value || [])];
+                              newUrls[index] = { value: e.target.value };
+                              field.onChange(newUrls);
+                            }}
+                          />
+                          <Button
+                            type="button"
+                            variant="destructive"
+                            onClick={() => {
+                              const newUrls = field.value?.filter(
+                                (_, i) => i !== index
+                              );
+                              field.onChange(newUrls);
+                            }}
+                          >
+                            Remove
+                          </Button>
+                        </div>
+                      ))}
+                      <Button
+                        type="button"
+                        variant="outline"
+                        onClick={() => {
+                          field.onChange([
+                            ...(field.value || []),
+                            { value: "" },
+                          ]);
+                        }}
+                      >
+                        Add URL
+                      </Button>
+                    </>
                   </div>
                 </FormControl>
                 <FormDescription>
