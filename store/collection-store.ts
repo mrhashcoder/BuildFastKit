@@ -1,5 +1,4 @@
 // collectionStore.ts
-
 import {
   atom,
   atomFamily,
@@ -25,7 +24,8 @@ export interface EntityState<T> {
 }
 
 // Base URL for your Strapi REST API (adjust accordingly)
-const BASE_URL = "http://localhost:1337/api";
+const BASE_URL =
+  process.env.NEXT_PUBLIC_BASE_SERVER_URL || "http://localhost:1337/api";
 
 /**
  * Creates a store for a given collection.
@@ -136,17 +136,17 @@ export function createCollectionStore<T>(
               `${BASE_URL}/${apiEndpoint}`,
               newEntityData
             );
-  
+
             const newEntity = response.data.data; // Ensure correct API response structure
             const newEntityId = (newEntity as any).id;
-  
+
             set(entityAtomFamily(newEntityId), {
               data: newEntity,
               status: FetchState.SUCCESS,
             });
-  
+
             set(entityIdsAtom, (prevIds) => [...prevIds, newEntityId]);
-  
+
             return newEntity;
           } catch (error) {
             console.error("Error adding entity:", error);
@@ -156,8 +156,7 @@ export function createCollectionStore<T>(
       [entityIdsAtom]
     );
   };
-  
-  
+
   /**
    * Hook for performing a global fetch of all entities.
    * This hook returns a callback that, when called, fetches all entities from the API,
@@ -317,4 +316,3 @@ export function createCollectionStore<T>(
 //   const newUser = { name: "John Doe", email: "john@example.com" };
 //   await addEntity(newUser);
 // };
-

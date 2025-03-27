@@ -14,10 +14,12 @@ export default function Layout({ children }: LayoutProps) {
   return (
     <div className="">
       <AuthLayout>
-        <NavBar />
-        <div className="w-7xl flex justify-center">{children}</div>
-        <Footer />
-        <Toaster />
+        <>
+          <NavBar />
+          <div className="w-7xl flex justify-center">{children}</div>
+          <Footer />
+          <Toaster />
+        </>
       </AuthLayout>
     </div>
   );

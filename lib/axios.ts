@@ -9,7 +9,7 @@ const token = process.env.NEXT_PUBLIC_AXIOS_TOKEN;
 // Create an Axios instance with a base URL and default headers.
 const axiosInstance = axios.create({
   baseURL:
-    process.env.NEXT_PUBLIC_API_BASE_URL || "https://your-strapi-api.com/api",
+    process.env.NEXT_PUBLIC_BASE_SERVER_URL || "http://localhost:1337/api",
   headers: {
     "Content-Type": "application/json",
     // Attach the token if available.

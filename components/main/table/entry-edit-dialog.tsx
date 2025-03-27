@@ -99,16 +99,18 @@ export default function EntryEditDialog<TData>({
                       handleInputChange(column.key, value)
                     }
                   >
-                    <SelectTrigger>
-                      <SelectValue placeholder={`Select ${column.label}`} />
-                    </SelectTrigger>
-                    <SelectContent>
-                      {column.options?.map((option) => (
-                        <SelectItem key={option} value={option}>
-                          {option}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
+                    <>
+                      <SelectTrigger>
+                        <SelectValue placeholder={`Select ${column.label}`} />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {column.options?.map((option) => (
+                          <SelectItem key={option} value={option}>
+                            {option}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </>
                   </Select>
                 ) : (
                   <Input

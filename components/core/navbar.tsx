@@ -55,8 +55,10 @@ export default function Navbar() {
               <>
                 <Button asChild>
                   <Link href={afterAuthLink.path}>
-                    <LayoutDashboard className="mr-2 h-5 w-5" />
-                    Dashboard
+                    <>
+                      <LayoutDashboard className="mr-2 h-5 w-5" />
+                      Dashboard
+                    </>
                   </Link>
                 </Button>
               </>
@@ -64,14 +66,18 @@ export default function Navbar() {
               <>
                 <Button variant="outline" className="mr-2" asChild>
                   <Link href={authLink.path}>
-                    <LogIn className="mr-2 h-5 w-5" />
-                    Login
+                    <>
+                      <LogIn className="mr-2 h-5 w-5" />
+                      Login
+                    </>
                   </Link>
                 </Button>
                 <Button asChild>
                   <Link href={authRegisterLink.path}>
-                    <ArrowRight className="mr-2 h-5 w-5" />
-                    Register
+                    <>
+                      <ArrowRight className="mr-2 h-5 w-5" />
+                      Register
+                    </>
                   </Link>
                 </Button>
               </>
@@ -81,57 +87,67 @@ export default function Navbar() {
           {/* Mobile Menu */}
           <div className="md:hidden">
             <Sheet open={isOpen} onOpenChange={setIsOpen}>
-              <SheetTrigger asChild>
-                <Button variant="outline" size="icon">
-                  <Menu className="h-6 w-6" />
-                  <span className="sr-only">Toggle menu</span>
-                </Button>
-              </SheetTrigger>
-              <SheetContent side="right" className="w-[300px] sm:w-[400px]">
-                <nav className="flex flex-col gap-4">
-                  {NavbarLinks.map((item) => (
-                    <Link
-                      key={item.name}
-                      href={item.path}
-                      className="flex items-center text-lg font-medium"
-                      onClick={() => setIsOpen(false)}
-                    >
-                      <item.icon className="mr-2 h-5 w-5" />
-                      {item.name}
-                    </Link>
-                  ))}
-
-                  {isAuthenticated ? (
-                    <>
-                      <Button asChild className="w-full justify-start">
-                        <Link href={afterAuthLink.path}>
-                          <LayoutDashboard className="mr-2 h-6 w-6" />
-                          Dashboard
-                        </Link>
-                      </Button>
-                    </>
-                  ) : (
-                    <>
-                      <Button
-                        variant="outline"
-                        className="w-full justify-start"
-                        asChild
+              <>
+                <SheetTrigger asChild>
+                  <Button variant="outline" size="icon">
+                    <Menu className="h-6 w-6" />
+                    <span className="sr-only">Toggle menu</span>
+                  </Button>
+                </SheetTrigger>
+                <SheetContent side="right" className="w-[300px] sm:w-[400px]">
+                  <nav className="flex flex-col gap-4">
+                    {NavbarLinks.map((item) => (
+                      <Link
+                        key={item.name}
+                        href={item.path}
+                        className="flex items-center text-lg font-medium"
+                        onClick={() => setIsOpen(false)}
                       >
-                        <Link href={authLink.path}>
-                          <LogIn className="mr-2 h-5 w-5" />
-                          Login
-                        </Link>
-                      </Button>
-                      <Button className="w-full justify-start" asChild>
-                        <Link href={authRegisterLink.path}>
-                          <ArrowRight className="mr-2 h-5 w-5" />
-                          Register
-                        </Link>
-                      </Button>
-                    </>
-                  )}
-                </nav>
-              </SheetContent>
+                        <>
+                          <item.icon className="mr-2 h-5 w-5" />
+                          {item.name}
+                        </>
+                      </Link>
+                    ))}
+
+                    {isAuthenticated ? (
+                      <>
+                        <Button asChild className="w-full justify-start">
+                          <Link href={afterAuthLink.path}>
+                            <>
+                              <LayoutDashboard className="mr-2 h-6 w-6" />
+                              Dashboard
+                            </>
+                          </Link>
+                        </Button>
+                      </>
+                    ) : (
+                      <>
+                        <Button
+                          variant="outline"
+                          className="w-full justify-start"
+                          asChild
+                        >
+                          <Link href={authLink.path}>
+                            <>
+                              <LogIn className="mr-2 h-5 w-5" />
+                              Login
+                            </>
+                          </Link>
+                        </Button>
+                        <Button className="w-full justify-start" asChild>
+                          <Link href={authRegisterLink.path}>
+                            <>
+                              <ArrowRight className="mr-2 h-5 w-5" />
+                              Register
+                            </>
+                          </Link>
+                        </Button>
+                      </>
+                    )}
+                  </nav>
+                </SheetContent>
+              </>
             </Sheet>
           </div>
         </div>

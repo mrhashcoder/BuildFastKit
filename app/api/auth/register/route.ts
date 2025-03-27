@@ -1,8 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { cookies } from "next/headers";
 
-const STRAPI_API_URL =
-  process.env.NEXT_PUBLIC_STRAPI_API_URL || "http://localhost:1337/api";
+const STRAPI_API_URL = process.env.BASE_SERVER_URL;
 
 export async function POST(req: NextRequest) {
   try {

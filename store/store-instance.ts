@@ -1,4 +1,4 @@
-import { User } from "@/types/collections";
+import { User, Product } from "@/types/collections";
 import { createCollectionStore } from "./collection-store";
 import { Wallpaper } from "@/config/content/wallpapers";
 import { AxiosResponse } from "axios";
@@ -17,6 +17,14 @@ let responseToWallpaperData = (response: AxiosResponse) => {
   }
 };
 
+let responseToProductData = (response: AxiosResponse) => {
+  if (response.data) {
+    if (response.data.data) {
+      return response.data.data;
+    }
+  }
+};
+
 export const usersStore = createCollectionStore<User>(
   "users",
   "users",
@@ -28,4 +36,11 @@ export const wallpapersStore = createCollectionStore<Wallpaper>(
   "wallpapers",
   "wallpapers",
   responseToWallpaperData
+);
+
+// Create a store for "products" collection
+export const productStore = createCollectionStore<Product>(
+  "products",
+  "products",
+  responseToProductData
 );

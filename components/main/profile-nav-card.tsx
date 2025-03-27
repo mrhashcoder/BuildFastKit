@@ -92,20 +92,22 @@ export default function ProfileNavCard({
                                     hover:bg-zinc-50 dark:hover:bg-zinc-800/50 
                                     rounded-lg transition-colors duration-200"
               >
-                <div className="flex items-center gap-2">
-                  {item.icon}
-                  <span className="text-sm font-medium text-zinc-900 dark:text-zinc-100">
-                    {item.label}
-                  </span>
-                </div>
-                <div className="flex items-center">
-                  {item.value && (
-                    <span className="text-sm text-zinc-500 dark:text-zinc-400 mr-2">
-                      {item.value}
+                <>
+                  <div className="flex items-center gap-2">
+                    {item.icon}
+                    <span className="text-sm font-medium text-zinc-900 dark:text-zinc-100">
+                      {item.label}
                     </span>
-                  )}
-                  {item.external && <MoveUpRight className="w-4 h-4" />}
-                </div>
+                  </div>
+                  <div className="flex items-center">
+                    {item.value && (
+                      <span className="text-sm text-zinc-500 dark:text-zinc-400 mr-2">
+                        {item.value}
+                      </span>
+                    )}
+                    {item.external && <MoveUpRight className="w-4 h-4" />}
+                  </div>
+                </>
               </Link>
             ))}
 
