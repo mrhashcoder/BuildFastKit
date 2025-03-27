@@ -14,8 +14,7 @@ import {
   HelpCircle,
 } from "lucide-react";
 
-
-import { User,  Palette, NotebookIcon, Monitor } from "lucide-react";
+import { User, Palette, NotebookIcon, Monitor } from "lucide-react";
 
 import type { NavLink } from "@/types";
 export interface NavCategory {
@@ -69,9 +68,9 @@ export const DashboardLinks: NavCategory[] = [
         icon: Receipt,
       },
       {
-        name: "Payments",
-        path: "/app/payments",
-        description: "Handle payment processing",
+        name: "Products",
+        path: "/app/products",
+        description: "Manage Products",
         icon: CreditCard,
       },
     ],
@@ -116,7 +115,7 @@ export const DashboardLinks: NavCategory[] = [
       },
       {
         name: "Help",
-        path: "/login",
+        path: "/app/help",
         description: "Get help and support",
         icon: HelpCircle,
       },
@@ -124,33 +123,35 @@ export const DashboardLinks: NavCategory[] = [
   },
 ];
 
-export const SettingLinks: NavLink[] = [  {
-  name: "Profile",
-  icon: User,
-  path: "/app/settings",
-  description: ""
-},
-{
-  name: "Account",
-  icon: Settings,
-  path: "/app/settings/account",
-  description: ""
-},
-{
-  name: "Appearance",
-  icon: Palette,
-  path: "/app/settings/appearance",
-  description: ""
-},
-{
-  name: "Notifications",
-  icon: NotebookIcon,
-  path: "/app/settings/notifications",
-  description: ""
-},
-{
-  name: "Display",
-  icon: Monitor,
-  path: "/app/settings/display",
-  description: ""
-},];
+export const SettingLinks: NavLink[] = [
+  {
+    name: "Profile",
+    icon: User,
+    path: "/app/settings",
+    description: "",
+  },
+  {
+    name: "Account",
+    icon: Settings,
+    path: "/app/settings/account",
+    description: "",
+  },
+  {
+    name: "Appearance",
+    icon: Palette,
+    path: "/app/settings/appearance",
+    description: "",
+  },
+  {
+    name: "Notifications",
+    icon: NotebookIcon,
+    path: "/app/settings/notifications",
+    description: "",
+  },
+  {
+    name: "Display",
+    icon: Monitor,
+    path: "/app/settings/display",
+    description: "",
+  },
+];

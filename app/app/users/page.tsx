@@ -8,18 +8,7 @@ import { useEffect, useState } from "react";
 import { useRecoilValue } from "recoil";
 
 export default function UsersPage() {
-  const fetchUsers = usersStore.useFetchEntities();
-  const fetchWallpaper = wallpapersStore.useFetchEntities();
   const userIds = usersStore.useEntityIds();
-  useEffect(() => {
-    fetchWallpaper()
-      .then((ids) => {
-        console.log(ids);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
   return (
     <>
       <UserListManager userIds={userIds} />
