@@ -7,6 +7,7 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { useAuth } from "../providers/strapi-auth-provider";
 
 interface MenuItem {
   label: string;
@@ -57,6 +58,8 @@ export default function ProfileNavCard({
       external: true,
     },
   ];
+
+  const {signOut} = useAuth();
 
   return (
     <div className="w-full max-w-sm mx-auto">
@@ -113,6 +116,7 @@ export default function ProfileNavCard({
 
             <button
               type="button"
+              onClick={signOut}
               className="w-full flex items-center justify-between p-2 
                                 hover:bg-zinc-50 dark:hover:bg-zinc-800/50 
                                 rounded-lg transition-colors duration-200"
